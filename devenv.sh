@@ -136,13 +136,14 @@ clone() {
     if [ -d "$DIR" ]; then
         printf "${YELLOW}Verzeichnis %s existiert. Überschreiben? [j/N] ${NC}" "$DIR";
         read -n 1 -r
+        printf "\n"
         if [[ $REPLY =~ ^[JjYy]$ ]]; then
             rm -rf "$DIR";
         else
-            exit 1;
+            return 1;
         fi
     fi
-    printf "\n\n"
+    printf "\n"
 
     git clone "$1" "$DIR"
 
@@ -150,7 +151,7 @@ clone() {
 
     if [ $? -ne 0 ]; then
         printf "${RED}Klonen fehlgeschlagen. Bist du berechtigt?${NC}\n";
-        exit 1;
+        return 1;
     else
         printf "${GREEN}Klonen von %s erfolgreich!${NC}\n\n" "$DIR";
     fi
