@@ -1,0 +1,18 @@
+# Protokoll 04.05.2021
+:nofooter:
+
+### Infrastruktur
+
+- Docker wird erstmal hintenangestellt. Services werden mit docker-compose Postgres für den jeweiligen. Wichtig: Port muss für jeden Service freigegeben und anders sein.
+- Exceptionhandling: Globales Exceptionhandling über Library. Custom Exception Superklasse: ServiceException definiert Attribute wie z.b. HttpStatus. Handling über globalen Handler -> ResponseEntities sind nicht zwingend in der Methodensignatur erforderlich. -> Dominik
+- Messagebroker: ActiveMQ. [.line-through]#- evtl. mit Embedded Instanz?# Sidecars checken. => docker-compose.yml in Orga.
+- Postman API Tests => Swagger / OpenAPI 3.0 via https://apitransform.com?
+- Testen: Unit-Tests / Mock-Tests of Service. -> Jannis guckt ma
+
+### Sinnkrise
+
+- [.line-through]#Prüft das Gateway die Datenintegrität#, oder kommunizieren wir neue IDs direkt per Message? -> Jannis macht die Tables.
+
+### News-Service
+
+- Neuigkeiten User bezogen. Bsp.: Timestamp wann das letzte mal abgeholt wurde alles seitdem wird angezeigt.
