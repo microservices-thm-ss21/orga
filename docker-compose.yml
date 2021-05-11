@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  issue:
+    extends:
+      file: ../issue-service/docker-compose.yml
+      service: issue-service
+  project:
+    extends:
+      file: ../project-service/docker-compose.yml
+      service: project-service
+  project-db:
+    extends:
+      file: ../project-service/docker-compose.yml
+      service: project-db
+  user:
+    extends:
+      file: ../user-service/docker-compose.yml
+      service: user-service
+
+networks:
+  network:
+    driver: bridge
+  issue-database:
+    driver: bridge
+  project-database:
+    driver: bridge
+  user-database:
+    driver: bridge

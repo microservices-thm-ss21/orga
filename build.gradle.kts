@@ -7,20 +7,26 @@ plugins {
 }
 
 val repos = mapOf(
+    Pair("service-lib", Pair("../service-lib", "git@git.thm.de:microservicesss21/service-lib.git")),
     Pair("issue-service", Pair("../issue-service", "git@git.thm.de:microservicesss21/issue-service.git")),
     Pair("project-service", Pair("../project-service", "git@git.thm.de:microservicesss21/project-service.git")),
     Pair("user-service", Pair("../user-service", "git@git.thm.de:microservicesss21/user-service.git")),
-    Pair("news-service", Pair("../news-service", "git@git.thm.de:microservicesss21/news-service.git")),
-    Pair("service-service", Pair("../service-lib", "git@git.thm.de:microservicesss21/service-lib.git"))
+    Pair("news-service", Pair("../news-service", "git@git.thm.de:microservicesss21/news-service.git"))
 )
 
 repositories {
     jcenter()
 }
 
+task<GradleBuild>("publishLib") {
+    description = "Shortcut to publish service-lib"
+    buildFile = File("../service-lib/lib/build.gradle.kts")
+    tasks = listOf("publish")
+}
+
 task("gitPull") {
     description = "Pulls git."
-    doLast {
+    doFirst {
         repos.forEach {
             if (file(it.value.first).exists()) {
                 val project = Grgit.open { dir = "$rootDir/${it.value.first}"; }
@@ -40,3 +46,8 @@ task("gitClone") {
         }
     }
 }
+
+//task<Exec>("runAll") {
+//    description = "Builds and runs all services"
+//    commandLine = emptyList()
+//}
