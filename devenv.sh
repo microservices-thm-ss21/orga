@@ -116,6 +116,7 @@ ISSUE_SERVICE="git@git.thm.de:microservicesss21/issue-service.git"
 PROJECT_SERVICE="git@git.thm.de:microservicesss21/project-service.git"
 USER_SERVICE="git@git.thm.de:microservicesss21/user-service.git"
 TEMPLATE_SERVICE="git@git.thm.de:microservicesss21/template-service.git"
+SERVICE_LIB="https://git.thm.de/microservicesss21/service-lib.git"
 # Verzeichnisse
 ORGA_DIR="${pwd}"
 
@@ -162,6 +163,7 @@ clone_repositories() {
   clone $PROJECT_SERVICE
   clone $USER_SERVICE
   clone $TEMPLATE_SERVICE
+  clone $SERVICE_LIB
 } # end clone_repositories
 
 update_repositories() {
@@ -170,6 +172,7 @@ update_repositories() {
 	cd  "../$(echo $PROJECT_SERVICE | sed 's/.*\///' | sed 's/\.git//')" && git pull && cd "$ORGA_DIR"
 	cd  "../$(echo $USER_SERVICE | sed 's/.*\///' | sed 's/\.git//')" && git pull && cd "$ORGA_DIR"
 	cd  "../$(echo $TEMPLATE_SERVICE | sed 's/.*\///' | sed 's/\.git//')" && git pull && cd "$ORGA_DIR"
+  cd  "../$(echo $SERVICE_LIB | sed 's/.*\///' | sed 's/\.git//')" && git pull && cd "$ORGA_DIR"
 
 }
 
