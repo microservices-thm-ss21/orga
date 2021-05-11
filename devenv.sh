@@ -116,7 +116,7 @@ ISSUE_SERVICE="git@git.thm.de:microservicesss21/issue-service.git"
 PROJECT_SERVICE="git@git.thm.de:microservicesss21/project-service.git"
 USER_SERVICE="git@git.thm.de:microservicesss21/user-service.git"
 TEMPLATE_SERVICE="git@git.thm.de:microservicesss21/template-service.git"
-SERVICE_LIB="https://git.thm.de/microservicesss21/service-lib.git"
+SERVICE_LIB="git@git.thm.de:microservicesss21/service-lib.git"
 # Verzeichnisse
 ORGA_DIR="${pwd}"
 
