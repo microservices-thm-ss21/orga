@@ -5,6 +5,10 @@ services:
     extends:
       file: ../issue-service/docker-compose.yml
       service: issue-service
+  issue-db:
+    extends:
+      file: ../issue-service/docker-compose.yml
+      service: issue-db
   project:
     extends:
       file: ../project-service/docker-compose.yml
@@ -17,6 +21,30 @@ services:
     extends:
       file: ../user-service/docker-compose.yml
       service: user-service
+  user-db:
+    extends:
+      file: ../user-service/docker-compose.yml
+      service: user-db
+  news:
+    extends:
+      file: ../news-service/docker-compose.yml
+      service: news-service
+  news-db:
+    extends:
+      file: ../news-service/docker-compose.yml
+      service: news-db
+  activemq:
+    image: rmohr/activemq:latest
+    container_name: activemq
+    environment:
+      - "TZ=Europe/Berlin"
+    volumes:
+      - "./activemq/activemq.xml:/conf/activemq.xml"
+    ports:
+      - 61616:61616 # broker (admin:adminactivemq)(amq:amq)
+      - 8161:8161   # web    http://boot2docker:8161/admin (admin:admin)
+    networks:
+      - network
 
 networks:
   network:
@@ -26,4 +54,6 @@ networks:
   project-database:
     driver: bridge
   user-database:
+    driver: bridge
+  news-database:
     driver: bridge
