@@ -1,0 +1,119 @@
+networks:
+  issue-database:
+    driver: bridge
+  network:
+    driver: bridge
+  news-database:
+    driver: bridge
+  project-database:
+    driver: bridge
+  user-database:
+    driver: bridge
+services:
+  activemq:
+    container_name: activemq
+    environment:
+      TZ: Europe/Berlin
+    image: rmohr/activemq:latest
+    networks:
+      network: null
+    ports:
+      - published: 61616
+        target: 61616
+      - published: 8161
+        target: 8161
+    volumes:
+      - C:\Users\domin\IdeaProjects\Microservices\orga\activemq\activemq.xml:/conf/activemq.xml:rw
+  issue:
+    build:
+      context: C:\Users\domin\IdeaProjects\Microservices\issue-service
+      dockerfile: Dockerfile
+    image: issue-service
+    networks:
+      issue-database: {}
+      network: {}
+    ports:
+      - published: 8081
+        target: 8081
+    volumes:
+      - /data/issue-service
+  issue-db:
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: dev
+    image: postgres
+    networks:
+      issue-database: {}
+    volumes:
+      - C:\Users\domin\IdeaProjects\Microservices\issue-service\sql\create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql:rw
+      - /var/lib/postgresql/data
+  news:
+    build:
+      context: C:\Users\domin\IdeaProjects\Microservices\news-service
+      dockerfile: Dockerfile
+    image: news-service
+    networks:
+      network: {}
+      news-database: {}
+    ports:
+      - published: 8084
+        target: 8084
+    volumes:
+      - /data/news-service
+  news-db:
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: dev
+    image: postgres
+    networks:
+      news-database: {}
+    volumes:
+      - C:\Users\domin\IdeaProjects\Microservices\news-service\sql\create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql:rw
+      - /var/lib/postgresql/data
+  project:
+    build:
+      context: C:\Users\domin\IdeaProjects\Microservices\project-service
+      dockerfile: Dockerfile
+    image: project-service
+    networks:
+      network: {}
+      project-database: {}
+    ports:
+      - published: 8082
+        target: 8082
+    volumes:
+      - /data/project-service
+  project-db:
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: dev
+    image: postgres
+    networks:
+      project-database: {}
+    volumes:
+      - C:\Users\domin\IdeaProjects\Microservices\project-service\sql\create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql:rw
+      - /var/lib/postgresql/data
+  user:
+    build:
+      context: C:\Users\domin\IdeaProjects\Microservices\user-service
+      dockerfile: Dockerfile
+    image: user-service
+    networks:
+      network: {}
+      user-database: {}
+    ports:
+      - published: 8083
+        target: 8083
+    volumes:
+      - /data/user-service
+  user-db:
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: dev
+    image: postgres
+    networks:
+      user-database: {}
+    volumes:
+      - C:\Users\domin\IdeaProjects\Microservices\user-service\sql\create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql:rw
+      - /var/lib/postgresql/data
+version: '3'
