@@ -18,10 +18,38 @@ repositories {
     jcenter()
 }
 
-task<GradleBuild>("publishLib") {
+tasks.register("buildAll") {
+    dependsOn("buildIssueService", "buildProjectService", "buildUserService", "buildNewsService", "buildServiceLib")
+}
+
+tasks.register("buildIssueService", GradleBuild::class) {
+    description = "Build IssueService"
+    buildFile = File("../issue-service/build.gradle.kts")
+    tasks = listOf("build")
+}
+
+tasks.register("buildProjectService", GradleBuild::class) {
+    description = "Build ProjectService"
+    buildFile = File("../project-service/build.gradle.kts")
+    tasks = listOf("build")
+}
+
+tasks.register("buildUserService", GradleBuild::class) {
+    description = "Build UserService"
+    buildFile = File("../user-service/build.gradle.kts")
+    tasks = listOf("build")
+}
+
+tasks.register("buildNewsService", GradleBuild::class) {
+    description = "Build NewsService"
+    buildFile = File("../news-service/build.gradle.kts")
+    tasks = listOf("build")
+}
+
+tasks.register("buildServiceLib", GradleBuild::class) {
     description = "Shortcut to publish service-lib"
     buildFile = File("../service-lib/lib/build.gradle.kts")
-    tasks = listOf("publish")
+    tasks = listOf("build")
 }
 
 task("gitPull") {
@@ -46,8 +74,3 @@ task("gitClone") {
         }
     }
 }
-
-//task<Exec>("runAll") {
-//    description = "Builds and runs all services"
-//    commandLine = emptyList()
-//}
