@@ -19,7 +19,7 @@ repositories {
 }
 
 tasks.register("buildAll") {
-    dependsOn("buildIssueService", "buildProjectService", "buildUserService", "buildNewsService", "buildServiceLib")
+    dependsOn("publishServiceLib", "buildIssueService", "buildProjectService", "buildUserService", "buildNewsService")
 }
 
 tasks.register("buildIssueService", GradleBuild::class) {
@@ -46,10 +46,10 @@ tasks.register("buildNewsService", GradleBuild::class) {
     tasks = listOf("build")
 }
 
-tasks.register("buildServiceLib", GradleBuild::class) {
+tasks.register("publishServiceLib", GradleBuild::class) {
     description = "Shortcut to publish service-lib"
     buildFile = File("../service-lib/lib/build.gradle.kts")
-    tasks = listOf("build")
+    tasks = listOf("publish")
 }
 
 task("gitPull") {
