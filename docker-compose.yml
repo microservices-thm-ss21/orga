@@ -38,6 +38,7 @@ services:
     container_name: activemq
     environment:
       - "TZ=Europe/Berlin"
+      - "ACTIVEMQ_OPTS=-Dorg.apache.activemq.SERIALIZABLE_PACKAGES=java.lang,javax.security,java.util,org.apache.activemq,org.fusesource.hawtbuf,com.thoughtworks.xstream.mapper,de.thm.mni.microservices,java.time"
     volumes:
       - "./activemq/activemq.xml:/conf/activemq.xml"
     ports:
