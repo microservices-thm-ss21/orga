@@ -7,6 +7,7 @@ plugins {
 }
 
 val repos = mapOf(
+    Pair("orga", Pair("../orga", "git@git.thm.de:microservicesss21/orga.git")),
     Pair("service-lib", Pair("../service-lib", "git@git.thm.de:microservicesss21/service-lib.git")),
     Pair("issue-service", Pair("../issue-service", "git@git.thm.de:microservicesss21/issue-service.git")),
     Pair("project-service", Pair("../project-service", "git@git.thm.de:microservicesss21/project-service.git")),
@@ -52,7 +53,19 @@ tasks.register("publishServiceLib", GradleBuild::class) {
     tasks = listOf("publish")
 }
 
-task("gitPull") {
+task("checkoutMaster") {
+    description = "checkouts to master branch"
+    doFirst {
+        repos.forEach {
+            if (file(it.value.first).exists()) {
+                val project = Grgit.open { dir = "$rootDir/${it.value.first}"; }
+                project.checkout(mapOf(Pair("branch","master")))
+            }
+        }
+    }
+}
+
+task("pullAll") {
     description = "Pulls git."
     doFirst {
         repos.forEach {
