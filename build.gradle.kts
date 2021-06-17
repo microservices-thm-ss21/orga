@@ -87,3 +87,70 @@ task("gitClone") {
         }
     }
 }
+
+tasks.register("deployAll") {
+    dependsOn("deployNews", "deployProject", "deployUser", "deployIssue")
+}
+
+tasks.register("deployNews") {
+    dependsOn("buildNewsService")
+    doLast {
+        exec {
+            commandLine = listOf("docker", "compose", "stop", "news")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "build", "news")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "start", "news")
+        }
+    }
+}
+
+tasks.register("deployProject") {
+    dependsOn("buildProjectService")
+    doLast {
+        exec {
+            commandLine = listOf("docker", "compose", "stop", "project")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "build", "project")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "start", "project")
+        }
+    }
+}
+
+tasks.register("deployIssue") {
+    dependsOn("buildIssueService")
+    doLast {
+
+        exec {
+            commandLine = listOf("docker", "compose", "stop", "issue")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "build", "issue")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "start", "issue")
+        }
+    }
+}
+
+tasks.register("deployUser") {
+    dependsOn("buildUserService")
+    doLast {
+
+        exec {
+            commandLine = listOf("docker", "compose", "stop", "user")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "build", "user")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "start", "user")
+        }
+    }
+}
+
