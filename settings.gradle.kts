@@ -8,3 +8,5 @@
  */
 
 rootProject.name = "microservices"
+
+include("data-generator")

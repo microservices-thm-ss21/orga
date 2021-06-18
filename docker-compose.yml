@@ -33,6 +33,10 @@ services:
     extends:
       file: ../news-service/docker-compose.yml
       service: news-db
+  news-mongo:
+    extends:
+      file: ../news-service/docker-compose.yml
+      service: news-mongo
   activemq:
     image: rmohr/activemq:latest
     container_name: activemq

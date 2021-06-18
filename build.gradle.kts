@@ -1,8 +1,6 @@
 import org.ajoberstar.grgit.*
 
 plugins {
-    java
-    kotlin("jvm") version "1.4.32"
     id("org.ajoberstar.grgit") version "4.1.0"
 }
 
