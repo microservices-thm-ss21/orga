@@ -10,7 +10,8 @@ val repos = mapOf(
     Pair("issue-service", Pair("../issue-service", "git@git.thm.de:microservicesss21/issue-service.git")),
     Pair("project-service", Pair("../project-service", "git@git.thm.de:microservicesss21/project-service.git")),
     Pair("user-service", Pair("../user-service", "git@git.thm.de:microservicesss21/user-service.git")),
-    Pair("news-service", Pair("../news-service", "git@git.thm.de:microservicesss21/news-service.git"))
+    Pair("news-service", Pair("../news-service", "git@git.thm.de:microservicesss21/news-service.git")),
+    Pair("gateway", Pair("../gateway", "git@git.thm.de:microservicesss21/gateway.git"))
 )
 
 repositories {
@@ -18,7 +19,13 @@ repositories {
 }
 
 tasks.register("buildAll") {
-    dependsOn("publishServiceLib", "buildIssueService", "buildProjectService", "buildUserService", "buildNewsService")
+    dependsOn("publishServiceLib", "buildIssueService", "buildProjectService", "buildUserService", "buildNewsService", "buildGateway")
+}
+
+tasks.register("buildGateway", GradleBuild::class) {
+    description = "Build Gateway"
+    buildFile = File("../gateway/build.gradle.kts")
+    tasks = listOf("build")
 }
 
 tasks.register("buildIssueService", GradleBuild::class) {
@@ -87,7 +94,22 @@ task("gitClone") {
 }
 
 tasks.register("deployAll") {
-    dependsOn("deployNews", "deployProject", "deployUser", "deployIssue")
+    dependsOn("deployNews", "deployProject", "deployUser", "deployIssue", "deployGateway")
+}
+
+tasks.register("deployGateway") {
+    dependsOn("buildGateway")
+    doLast {
+        exec {
+            commandLine = listOf("docker", "compose", "stop", "gateway")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "build", "gateway")
+        }
+        exec {
+            commandLine = listOf("docker", "compose", "start", "gateway")
+        }
+    }
 }
 
 tasks.register("deployNews") {
