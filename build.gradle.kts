@@ -101,13 +101,13 @@ tasks.register("deployGateway") {
     dependsOn("buildGateway")
     doLast {
         exec {
-            commandLine = listOf("docker", "compose", "stop", "gateway")
+            commandLine = listOf("docker-compose", "stop", "gateway")
         }
         exec {
-            commandLine = listOf("docker", "compose", "build", "gateway")
+            commandLine = listOf("docker-compose", "build", "gateway")
         }
         exec {
-            commandLine = listOf("docker", "compose", "start", "gateway")
+            commandLine = listOf("docker-compose", "start", "gateway")
         }
     }
 }
@@ -116,13 +116,13 @@ tasks.register("deployNews") {
     dependsOn("buildNewsService")
     doLast {
         exec {
-            commandLine = listOf("docker", "compose", "stop", "news")
+            commandLine = listOf("docker-compose", "stop", "news")
         }
         exec {
-            commandLine = listOf("docker", "compose", "build", "news")
+            commandLine = listOf("docker-compose", "build", "news")
         }
         exec {
-            commandLine = listOf("docker", "compose", "start", "news")
+            commandLine = listOf("docker-compose", "start", "news")
         }
     }
 }
@@ -131,13 +131,13 @@ tasks.register("deployProject") {
     dependsOn("buildProjectService")
     doLast {
         exec {
-            commandLine = listOf("docker", "compose", "stop", "project")
+            commandLine = listOf("docker-compose", "stop", "project")
         }
         exec {
-            commandLine = listOf("docker", "compose", "build", "project")
+            commandLine = listOf("docker-compose", "build", "project")
         }
         exec {
-            commandLine = listOf("docker", "compose", "start", "project")
+            commandLine = listOf("docker-compose", "start", "project")
         }
     }
 }
@@ -147,13 +147,13 @@ tasks.register("deployIssue") {
     doLast {
 
         exec {
-            commandLine = listOf("docker", "compose", "stop", "issue")
+            commandLine = listOf("docker-compose", "stop", "issue")
         }
         exec {
-            commandLine = listOf("docker", "compose", "build", "issue")
+            commandLine = listOf("docker-compose", "build", "issue")
         }
         exec {
-            commandLine = listOf("docker", "compose", "start", "issue")
+            commandLine = listOf("docker-compose", "start", "issue")
         }
     }
 }
@@ -163,13 +163,13 @@ tasks.register("deployUser") {
     doLast {
 
         exec {
-            commandLine = listOf("docker", "compose", "stop", "user")
+            commandLine = listOf("docker-compose", "stop", "user")
         }
         exec {
-            commandLine = listOf("docker", "compose", "build", "user")
+            commandLine = listOf("docker-compose", "build", "user")
         }
         exec {
-            commandLine = listOf("docker", "compose", "start", "user")
+            commandLine = listOf("docker-compose", "start", "user")
         }
     }
 }
