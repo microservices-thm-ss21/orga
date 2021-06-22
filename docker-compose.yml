@@ -1,6 +1,10 @@
 version: '3'
 
 services:
+  gateway:
+    extends:
+      file: ../gateway/docker-compose.yml
+      service: gateway
   issue:
     extends:
       file: ../issue-service/docker-compose.yml
