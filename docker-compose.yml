@@ -29,10 +29,6 @@ services:
     extends:
       file: ../news-service/docker-compose.yml
       service: news-service
-  news-db:
-    extends:
-      file: ../news-service/docker-compose.yml
-      service: news-db
   news-mongo:
     extends:
       file: ../news-service/docker-compose.yml
