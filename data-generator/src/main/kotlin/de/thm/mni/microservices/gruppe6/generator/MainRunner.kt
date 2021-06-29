@@ -4,14 +4,17 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 import de.thm.mni.microservices.gruppe6.generator.Service.*
+import de.thm.mni.microservices.gruppe6.generator.gen.UserGenerator
 import de.thm.mni.microservices.gruppe6.generator.model.Issue
+import de.thm.mni.microservices.gruppe6.generator.model.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @Component
-class MainRunner: CommandLineRunner {
+class MainRunner(val userGen: UserGenerator): CommandLineRunner {
 
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
+    private val users: MutableList<User> = mutableListOf()
 
     override fun run(vararg args: String?) {
 
