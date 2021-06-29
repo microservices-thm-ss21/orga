@@ -23,12 +23,14 @@ tasks.register("buildAll") {
 }
 
 tasks.register("buildGateway", GradleBuild::class) {
+    this.shouldRunAfter("publishServiceLib")
     description = "Build Gateway"
     buildFile = File("../gateway/build.gradle.kts")
     tasks = listOf("build")
 }
 
 tasks.register("buildIssueService", GradleBuild::class) {
+    this.shouldRunAfter("publishServiceLib")
     description = "Build IssueService"
     buildFile = File("../issue-service/build.gradle.kts")
     tasks = listOf("build")
