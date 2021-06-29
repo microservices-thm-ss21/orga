@@ -50,6 +50,27 @@ services:
       - 8161:8161   # web    http://boot2docker:8161/admin (admin:admin)
     networks:
       - network
+  influx:
+    image: influxdb:latest
+    environment:
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=PASSWORD
+      - DOCKER_INFLUXDB_INIT_BUCKET=TEST
+      - DOCKER_INFLUXDB_INIT_ORG=GRUPPE6
+      - INFLUXDB_DB=DBTEST
+      - INFLUXDB_HTTP_ENABLED=true
+      - INFLUXDB_HTTP_AUTH_ENABLED=true
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+    ports:
+      - 8086:8086
+    volumes:
+      - /var/lib/influxdb
+      - ./influx/init.iql:/docker-entrypoint-initdb.d/init.iql
+    #  - ./influx/influx.conf:/etc/influxdb/influx.conf
+    networks:
+      - network
+
+
 
 networks:
   network:
