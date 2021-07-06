@@ -1,52 +1,59 @@
 package de.thm.mni.microservices.gruppe6.generator.gen
 
+import de.thm.mni.microservices.gruppe6.generator.model.User
 import de.thm.mni.microservices.gruppe6.generator.model.UserDTO
 import io.github.serpro69.kfaker.Faker
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
+import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
+import reactor.core.publisher.FluxSink
+import reactor.core.publisher.Mono
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
-import java.util.*
+import java.time.ZoneId
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
-
 
 @Service
 class UserGenerator {
 
-    val userGeneratorFlux: Flux<UserDTO>
-    private var running = true
-    private val faker = Faker()
+    final val userGeneratorFlux: Flux<User>
+    private val webClient = WebClient.create("http://localhost:8083/api/users")
+    val faker = Faker()
+    private lateinit var thread: Job
+    private lateinit var sink: FluxSink<User>
 
     init {
-        userGeneratorFlux = Flux.create {
-            runBlocking {
-                launch {
-                    while (running) {
-                        delay(Random.nextLong(5000, 10000))
-                        val user = UserDTO()
-                        user.name = faker.name.firstName()
-                        user.lastName = faker.name.lastName()
-                        user.dateOfBirth = randomDate()
-                        user.username = faker.swordArtOnline.gameName()
-                        user.globalRole = listOf("USER", "ADMIN", "REPORTER").random()
-                        it.next(UserDTO())
-                    }
-                }
-            }
+        userGeneratorFlux = Flux.create { sink = it }
+    }
+
+    fun createRandomUser(): Mono<User> {
+        val userDTO = UserDTO()
+        userDTO.name = faker.name.firstName()
+        userDTO.lastName = faker.name.lastName()
+        userDTO.dateOfBirth = randomDate()
+        userDTO.email = "${faker.rickAndMorty.characters()}@gmail.com"
+        userDTO.username = faker.swordArtOnline.gameName()
+        userDTO.globalRole = listOf("USER", "ADMIN", "REPORTER").random()
+        return webClient.post().bodyValue(userDTO).exchangeToMono {
+            it.bodyToMono(User::class.java)
         }
     }
 
     fun stop() {
-        this.running = false
+        thread.cancel()
     }
 
+    @DelicateCoroutinesApi
     fun start() {
-        this.running = true
+        thread = GlobalScope.launch {
+            while (true) {
+                delay(Random.nextLong(5000, 10000))
+                createRandomUser().subscribe(sink::next)
+            }
+        }
     }
 
     private fun randomDate(): LocalDate {
@@ -55,7 +62,7 @@ class UserGenerator {
         val random: Long = ThreadLocalRandom
             .current()
             .nextLong(startSeconds, endSeconds)
-        return LocalDate.from(Instant.ofEpochSecond(random))
+        return LocalDate.ofInstant(Instant.ofEpochSecond(random), ZoneId.systemDefault())
     }
 
 }
