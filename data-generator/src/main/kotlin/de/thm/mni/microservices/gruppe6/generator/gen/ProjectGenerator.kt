@@ -75,13 +75,7 @@ class ProjectGenerator(private val utils: Utils): Generator<Project> {
     @DelicateCoroutinesApi
     override fun start(speed: Long, noRandom: Boolean) {
         if(this::thread.isInitialized && thread.isActive) thread.cancel()
-        thread = GlobalScope.launch {
-            while (true) {
-                if(!noRandom) delay(Random.nextLong((speed*0.67).toLong(), (speed*1.34).toLong()))
-                else delay(speed)
-                genSingleRandom(null).subscribe()
-            }
-        }
+        thread = utils.start(this, speed, noRandom)
     }
 
 }
