@@ -14,6 +14,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven {
         url = URI("https://oss.sonatype.org/content/repositories/snapshots/")
@@ -22,6 +23,7 @@ repositories {
 
 dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("de.thm.mni.microservices.gruppe6:service-lib:0.0.1-SNAPSHOT")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.springframework.shell:spring-shell-starter:2.0.1.RELEASE")

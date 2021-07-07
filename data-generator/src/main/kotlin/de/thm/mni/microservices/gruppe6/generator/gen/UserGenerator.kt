@@ -1,23 +1,20 @@
 package de.thm.mni.microservices.gruppe6.generator.gen
 
-import de.thm.mni.microservices.gruppe6.generator.model.User
-import de.thm.mni.microservices.gruppe6.generator.model.UserDTO
+import de.thm.mni.microservices.gruppe6.generator.Utils
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
+import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
+import de.thm.mni.microservices.gruppe6.lib.classes.userService.UserDTO
+import org.slf4j.Logger
 import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
-import java.time.Duration
-import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneId
-import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
 
 @Service
-class UserGenerator {
+class UserGenerator(private val utils: Utils): Generator<User> {
 
     final val userGeneratorFlux: Flux<User>
     private val webClient = WebClient.create("http://localhost:8083/api/users")
@@ -29,40 +26,38 @@ class UserGenerator {
         userGeneratorFlux = Flux.create { sink = it }
     }
 
-    fun createRandomUser(): Mono<User> {
+    override fun genSingleRandom(logger: Logger?): Mono<User> {
         val userDTO = UserDTO()
         userDTO.name = faker.name.firstName()
         userDTO.lastName = faker.name.lastName()
-        userDTO.dateOfBirth = randomDate()
+        userDTO.dateOfBirth = utils.randomDate()
         userDTO.email = "${faker.rickAndMorty.characters()}@gmail.com"
         userDTO.username = faker.swordArtOnline.gameName()
-        userDTO.globalRole = listOf("USER", "ADMIN", "REPORTER").random()
+        userDTO.globalRole = utils.randomRole()
         return webClient.post().bodyValue(userDTO).exchangeToMono {
             it.bodyToMono(User::class.java)
-        }
-    }
-
-    fun stop() {
-        thread.cancel()
-    }
-
-    @DelicateCoroutinesApi
-    fun start() {
-        thread = GlobalScope.launch {
-            while (true) {
-                delay(Random.nextLong(5000, 10000))
-                createRandomUser().subscribe(sink::next)
+                .map { user->
+                sink.next(user)
+                logger?.info(user.id.toString())
+                user
             }
         }
     }
 
-    private fun randomDate(): LocalDate {
-        val startSeconds = Instant.now().minus(Duration.ofDays(100 * 365)).epochSecond
-        val endSeconds = Instant.now().minus(Duration.ofDays(10 * 365)).epochSecond
-        val random: Long = ThreadLocalRandom
-            .current()
-            .nextLong(startSeconds, endSeconds)
-        return LocalDate.ofInstant(Instant.ofEpochSecond(random), ZoneId.systemDefault())
+    override fun stop() {
+        thread.cancel()
+    }
+
+    @DelicateCoroutinesApi
+    override fun start(speed: Long, noRandom: Boolean) {
+        if(this::thread.isInitialized && thread.isActive) thread.cancel()
+        thread = GlobalScope.launch {
+            while (true) {
+                if(!noRandom) delay(Random.nextLong((speed*0.67).toLong(), (speed*1.34).toLong()))
+                else delay(speed)
+                genSingleRandom(null).subscribe()
+            }
+        }
     }
 
 }
