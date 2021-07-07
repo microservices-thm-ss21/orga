@@ -74,7 +74,9 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
         }
     }
 
-
+    /*
+    DELETE CODE BELOW AFTER REVIEW!
+     */
 
     @ShellMethod("Generate random project.", group = "Project")
     fun createProject() {
