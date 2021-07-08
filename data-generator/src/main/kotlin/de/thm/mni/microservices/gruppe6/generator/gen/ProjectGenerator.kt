@@ -1,6 +1,6 @@
 package de.thm.mni.microservices.gruppe6.generator.gen
 
-import de.thm.mni.microservices.gruppe6.generator.Commands
+import de.thm.mni.microservices.gruppe6.generator.ServiceAddress
 import de.thm.mni.microservices.gruppe6.generator.Utils
 import org.slf4j.Logger
 import de.thm.mni.microservices.gruppe6.lib.classes.projectService.MemberDTO
@@ -14,17 +14,21 @@ import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
 import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
+import java.lang.Integer.min
 import java.util.*
 import kotlin.random.Random
 
 @Service
 class ProjectGenerator(private val utils: Utils): Generator<Project> {
 
+    // SETTING
+    private final val maxInitialMemberCount = 150
+
     final val projectGeneratorFlux: Flux<Project>
     final val memberGeneratorFlux: Flux<Pair<UUID, MemberDTO>>
     final val users: MutableList<User> = mutableListOf()
 
-    private val webClient = WebClient.create("http://localhost:8082/api/projects")
+    private val webClient = WebClient.create(ServiceAddress.PROJECT.toString())
     val faker = Faker()
     private lateinit var thread: Job
     private lateinit var projectSink: FluxSink<Project>
@@ -50,11 +54,7 @@ class ProjectGenerator(private val utils: Utils): Generator<Project> {
         val projectDTO = ProjectDTO()
         projectDTO.creatorId = users.random().id
         projectDTO.name = faker.company.buzzwords()
-        val fromIndex = Random.nextInt(users.size)
-        projectDTO.members = users.subList(
-            fromIndex,
-            Random.nextInt(fromIndex, users.size)
-        ).map {userToMemberDTO(it) }
+        projectDTO.members = utils.randomSubList(users, maxInitialMemberCount).map {userToMemberDTO(it) }
 
         return webClient.post().bodyValue(projectDTO).exchangeToMono {
             it.bodyToMono(Project::class.java)

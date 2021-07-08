@@ -29,6 +29,13 @@ class Utils {
         return listOf("USER", "ADMIN", "REPORTER").random()
     }
 
+    fun <E> randomSubList(list: List<E>, maxSize: Int = list.size): List<E> {
+        val fromIndex = Random.nextInt(list.size)
+        // Only allow a max size defined in config. If bigger than list size, take max size instead
+        val lastIndex = Random.nextInt(fromIndex, list.size.coerceAtMost(fromIndex + maxSize))
+        return list.subList(fromIndex, lastIndex)
+    }
+
     fun start(generator: Generator<out Any>, speed: Long, noRandom: Boolean): Job {
         return GlobalScope.launch {
             while (true) {

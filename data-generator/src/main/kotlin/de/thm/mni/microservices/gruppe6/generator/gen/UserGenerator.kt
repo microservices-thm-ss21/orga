@@ -1,5 +1,6 @@
 package de.thm.mni.microservices.gruppe6.generator.gen
 
+import de.thm.mni.microservices.gruppe6.generator.ServiceAddress
 import de.thm.mni.microservices.gruppe6.generator.Utils
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.*
@@ -17,7 +18,7 @@ import kotlin.random.Random
 class UserGenerator(private val utils: Utils): Generator<User> {
 
     final val userGeneratorFlux: Flux<User>
-    private val webClient = WebClient.create("http://localhost:8083/api/users")
+    private val webClient = WebClient.create(ServiceAddress.USER.toString())
     val faker = Faker()
     private lateinit var thread: Job
     private lateinit var sink: FluxSink<User>
