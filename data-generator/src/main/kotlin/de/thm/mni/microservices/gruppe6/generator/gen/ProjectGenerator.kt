@@ -22,7 +22,7 @@ import kotlin.random.Random
 class ProjectGenerator(private val utils: Utils): Generator<Project> {
 
     // SETTING
-    private final val maxInitialMemberCount = 150
+    private val maxInitialMemberCount = 150
 
     final val projectGeneratorFlux: Flux<Project>
     final val memberGeneratorFlux: Flux<Pair<UUID, MemberDTO>>

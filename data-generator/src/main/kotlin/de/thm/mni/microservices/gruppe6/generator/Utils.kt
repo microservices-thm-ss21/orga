@@ -1,10 +1,7 @@
 package de.thm.mni.microservices.gruppe6.generator
 
 import de.thm.mni.microservices.gruppe6.generator.gen.Generator
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import java.time.Duration
 import java.time.Instant
@@ -14,11 +11,12 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
 
 @Service
+@DelicateCoroutinesApi
 class Utils {
 
     fun randomDate(): LocalDate {
-        val startSeconds = Instant.now().minus(Duration.ofDays(100 * 365)).epochSecond
-        val endSeconds = Instant.now().minus(Duration.ofDays(10 * 365)).epochSecond
+        val startSeconds = Instant.now().minus(Duration.ofDays((100 * 365).toLong())).epochSecond
+        val endSeconds = Instant.now().minus(Duration.ofDays((10 * 365).toLong())).epochSecond
         val random: Long = ThreadLocalRandom
             .current()
             .nextLong(startSeconds, endSeconds)

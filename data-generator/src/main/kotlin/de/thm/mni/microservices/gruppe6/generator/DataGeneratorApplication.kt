@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Bean
 import org.springframework.shell.jline.PromptProvider
 
 @SpringBootApplication
-open class DataGeneratorApplication {
+class DataGeneratorApplication {
 
     @Bean
-    open fun myPromptProvider(): PromptProvider {
+    fun myPromptProvider(): PromptProvider {
         return PromptProvider { AttributedString("dataGen:>", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)) }
     }
 

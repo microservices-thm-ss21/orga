@@ -3,11 +3,10 @@ package de.thm.mni.microservices.gruppe6.generator
 import de.thm.mni.microservices.gruppe6.generator.gen.Generator
 import de.thm.mni.microservices.gruppe6.generator.gen.ProjectGenerator
 import de.thm.mni.microservices.gruppe6.generator.gen.UserGenerator
-import de.thm.mni.microservices.gruppe6.lib.classes.projectService.Member
 import de.thm.mni.microservices.gruppe6.lib.classes.projectService.MemberDTO
 import de.thm.mni.microservices.gruppe6.lib.classes.projectService.Project
 import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
-import io.github.serpro69.kfaker.Faker
+import kotlinx.coroutines.DelicateCoroutinesApi
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.shell.standard.ShellComponent
@@ -16,15 +15,16 @@ import org.springframework.shell.standard.ShellOption
 import java.util.*
 
 @ShellComponent
+@DelicateCoroutinesApi
 class Commands(private val userGen: UserGenerator, private val projectGen: ProjectGenerator) {
 
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
-    final val users: MutableList<User> = mutableListOf()
-    final val projects: MutableList<Project> = mutableListOf()
-    final val members: MutableMap<UUID, MutableList<MemberDTO>> = mutableMapOf()
+    private val users: MutableList<User> = mutableListOf()
+    private val projects: MutableList<Project> = mutableListOf()
+    private val members: MutableMap<UUID, MutableList<MemberDTO>> = mutableMapOf()
 
-    final val generators: MutableMap<String, Generator<out Any>> = mutableMapOf(
+    private val generators: MutableMap<String, Generator<out Any>> = mutableMapOf(
         Pair("user",userGen),
         Pair("project",projectGen)
     )
@@ -67,7 +67,7 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
     fun create(type: String){
         when {
             type == "all" -> generators.values.forEach{
-                it.genSingleRandom(logger)?.subscribe()
+                it.genSingleRandom(logger).subscribe()
             }
             generators.containsKey(type) -> generators[type]?.genSingleRandom(logger)?.subscribe()
             else -> logger.error("Unrecognized type: $type")

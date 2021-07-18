@@ -30,6 +30,7 @@ class UserGenerator(private val utils: Utils): Generator<User> {
     override fun genSingleRandom(logger: Logger?): Mono<User> {
         val userDTO = UserDTO()
         userDTO.name = faker.name.firstName()
+        userDTO.password = faker.device.serial()
         userDTO.lastName = faker.name.lastName()
         userDTO.dateOfBirth = utils.randomDate()
         userDTO.email = "${faker.rickAndMorty.characters()}@gmail.com"
