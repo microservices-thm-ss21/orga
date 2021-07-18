@@ -12,9 +12,9 @@ import org.slf4j.Logger
 import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
-import kotlin.random.Random
 
 @Service
+@DelicateCoroutinesApi
 class UserGenerator(private val utils: Utils): Generator<User> {
 
     final val userGeneratorFlux: Flux<User>
@@ -50,7 +50,6 @@ class UserGenerator(private val utils: Utils): Generator<User> {
         thread.cancel()
     }
 
-    @DelicateCoroutinesApi
     override fun start(speed: Long, noRandom: Boolean) {
         if(this::thread.isInitialized && thread.isActive) thread.cancel()
         thread = utils.start(this, speed, noRandom)
