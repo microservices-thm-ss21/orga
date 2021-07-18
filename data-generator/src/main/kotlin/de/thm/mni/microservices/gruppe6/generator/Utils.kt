@@ -11,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
 
 @Service
-@DelicateCoroutinesApi
 class Utils {
 
     fun randomDate(): LocalDate {

@@ -6,7 +6,6 @@ import de.thm.mni.microservices.gruppe6.generator.gen.UserGenerator
 import de.thm.mni.microservices.gruppe6.lib.classes.projectService.MemberDTO
 import de.thm.mni.microservices.gruppe6.lib.classes.projectService.Project
 import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
-import kotlinx.coroutines.DelicateCoroutinesApi
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.shell.standard.ShellComponent
@@ -15,7 +14,6 @@ import org.springframework.shell.standard.ShellOption
 import java.util.*
 
 @ShellComponent
-@DelicateCoroutinesApi
 class Commands(private val userGen: UserGenerator, private val projectGen: ProjectGenerator) {
 
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)

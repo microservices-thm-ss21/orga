@@ -14,7 +14,6 @@ import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
 
 @Service
-@DelicateCoroutinesApi
 class UserGenerator(private val utils: Utils): Generator<User> {
 
     final val userGeneratorFlux: Flux<User>

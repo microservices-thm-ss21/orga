@@ -72,7 +72,6 @@ class ProjectGenerator(private val utils: Utils): Generator<Project> {
         thread.cancel()
     }
 
-    @DelicateCoroutinesApi
     override fun start(speed: Long, noRandom: Boolean) {
         if(this::thread.isInitialized && thread.isActive) thread.cancel()
         thread = utils.start(this, speed, noRandom)
