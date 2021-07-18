@@ -26,38 +26,38 @@ tasks.register("buildGateway", GradleBuild::class) {
     this.shouldRunAfter("publishServiceLib")
     description = "Build Gateway"
     buildFile = File("../gateway/build.gradle.kts")
-    tasks = listOf("build")
+    tasks = listOf("clean", "build")
 }
 
 tasks.register("buildIssueService", GradleBuild::class) {
     this.shouldRunAfter("publishServiceLib")
     description = "Build IssueService"
     buildFile = File("../issue-service/build.gradle.kts")
-    tasks = listOf("build")
+    tasks = listOf("clean", "build")
 }
 
 tasks.register("buildProjectService", GradleBuild::class) {
     description = "Build ProjectService"
     buildFile = File("../project-service/build.gradle.kts")
-    tasks = listOf("build")
+    tasks = listOf("clean", "build")
 }
 
 tasks.register("buildUserService", GradleBuild::class) {
     description = "Build UserService"
     buildFile = File("../user-service/build.gradle.kts")
-    tasks = listOf("build")
+    tasks = listOf("clean", "build")
 }
 
 tasks.register("buildNewsService", GradleBuild::class) {
     description = "Build NewsService"
     buildFile = File("../news-service/build.gradle.kts")
-    tasks = listOf("build")
+    tasks = listOf("clean", "build")
 }
 
 tasks.register("publishServiceLib", GradleBuild::class) {
     description = "Shortcut to publish service-lib"
     buildFile = File("../service-lib/lib/build.gradle.kts")
-    tasks = listOf("publish")
+    tasks = listOf("clean", "publish")
 }
 
 task("checkoutMaster") {
