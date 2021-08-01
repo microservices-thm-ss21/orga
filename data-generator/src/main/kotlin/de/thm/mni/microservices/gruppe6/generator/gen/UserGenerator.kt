@@ -34,7 +34,7 @@ class UserGenerator(private val utils: Utils): Generator<User> {
         userDTO.dateOfBirth = utils.randomDate()
         userDTO.email = "${faker.rickAndMorty.characters()}@gmail.com"
         userDTO.username = faker.swordArtOnline.gameName()
-        userDTO.globalRole = utils.randomRole()
+        userDTO.globalRole = utils.randomGlobalRole()
         return webClient.post().bodyValue(userDTO).exchangeToMono {
             it.bodyToMono(User::class.java)
                 .map { user->

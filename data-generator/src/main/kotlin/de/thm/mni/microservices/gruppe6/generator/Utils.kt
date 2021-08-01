@@ -1,6 +1,8 @@
 package de.thm.mni.microservices.gruppe6.generator
 
 import de.thm.mni.microservices.gruppe6.generator.gen.Generator
+import de.thm.mni.microservices.gruppe6.lib.classes.projectService.ProjectRole
+import de.thm.mni.microservices.gruppe6.lib.classes.userService.GlobalRole
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import java.time.Duration
@@ -22,8 +24,12 @@ class Utils {
         return LocalDate.ofInstant(Instant.ofEpochSecond(random), ZoneId.systemDefault())
     }
 
-    fun randomRole(): String {
-        return listOf("USER", "ADMIN", "REPORTER").random()
+    fun randomGlobalRole(): GlobalRole {
+        return GlobalRole.values().random()
+    }
+
+    fun randomProjectRole(): ProjectRole {
+        return ProjectRole.values().random()
     }
 
     fun <E> randomSubList(list: List<E>, maxSize: Int = list.size): List<E> {

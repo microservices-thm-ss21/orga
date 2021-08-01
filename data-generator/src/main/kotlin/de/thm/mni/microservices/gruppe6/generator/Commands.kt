@@ -1,10 +1,11 @@
 package de.thm.mni.microservices.gruppe6.generator
 
 import de.thm.mni.microservices.gruppe6.generator.gen.Generator
+import de.thm.mni.microservices.gruppe6.generator.gen.LoginGen
 import de.thm.mni.microservices.gruppe6.generator.gen.ProjectGenerator
 import de.thm.mni.microservices.gruppe6.generator.gen.UserGenerator
-import de.thm.mni.microservices.gruppe6.lib.classes.projectService.MemberDTO
 import de.thm.mni.microservices.gruppe6.lib.classes.projectService.Project
+import de.thm.mni.microservices.gruppe6.lib.classes.projectService.ProjectRole
 import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -14,28 +15,38 @@ import org.springframework.shell.standard.ShellOption
 import java.util.*
 
 @ShellComponent
-class Commands(private val userGen: UserGenerator, private val projectGen: ProjectGenerator) {
+class Commands(private val userGen: UserGenerator, private val projectGen: ProjectGenerator, private val loginGen: LoginGen) {
 
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     private val users: MutableList<User> = mutableListOf()
     private val projects: MutableList<Project> = mutableListOf()
-    private val members: MutableMap<UUID, MutableList<MemberDTO>> = mutableMapOf()
+    // ProjectID -> ProjectRole -> List of userIDs associated with this role
+    private val members: MutableMap<UUID, MutableMap<ProjectRole, MutableList<UUID>>> = mutableMapOf()
+    private val logins: MutableList<String> = mutableListOf()
 
     private val generators: MutableMap<String, Generator<out Any>> = mutableMapOf(
+        Pair("login", loginGen),
         Pair("user",userGen),
         Pair("project",projectGen)
     )
 
     init {
-        userGen.userGeneratorFlux.subscribe{users.add(it); projectGen.users.add(it)}
+        userGen.userGeneratorFlux.subscribe{
+            users.add(it)
+            projectGen.users.add(it)
+            loginGen.users.add(it)
+        }
 
+        loginGen.loginGeneratorFlux.subscribe(logins::add)
         projectGen.projectGeneratorFlux.subscribe(projects::add)
+
         projectGen.memberGeneratorFlux.subscribe{
-            // Das geht doch sicher schöner, ich muss nur irgendwie das default value in die map bekommen
-            val memberList: MutableList<MemberDTO> = members.getOrDefault(it.first, mutableListOf())
-            memberList.add(it.second)
-            members[it.first] = memberList
+            // get Project-Map
+            members.getOrPut(it.first) { mutableMapOf() }
+                //get role of projects
+                .getOrPut(it.second) { mutableListOf() }
+                .add(it.third)
         }
     }
 
