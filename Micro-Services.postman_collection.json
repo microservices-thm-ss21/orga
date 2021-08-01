@@ -1,0 +1,692 @@
+{
+	"info": {
+		"_postman_id": "902c9cc4-5bfa-4f58-826b-e7d121aebd9e",
+		"name": "Micro-Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Project-Service",
+			"item": [
+				{
+					"name": "Projects",
+					"item": [
+						{
+							"name": "Get all Projects",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all Projects of User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/user/a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"user",
+										"a443ffd0-f7a8-44f6-8ad3-87acd1e91042"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Project by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/user/project/e42e93d1-56dc-4687-9039-beb25dc1732a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"user",
+										"project",
+										"e42e93d1-56dc-4687-9039-beb25dc1732a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Project",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Hauptsache es Funzt - Projekt\",\r\n    \"members\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8069/api/projects/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update (rename) Project",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/name/Renamed Project",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"e86c57cb-d703-4f39-9632-3782cb5500e8",
+										"name",
+										"Renamed Project"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Project by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"e86c57cb-d703-4f39-9632-3782cb5500e8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Members",
+					"item": [
+						{
+							"name": "Add member to a Project",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/8d8fa2d7-b999-4e07-9739-c563ee9fb12b/role/USER",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"e86c57cb-d703-4f39-9632-3782cb5500e8",
+										"members",
+										"user",
+										"8d8fa2d7-b999-4e07-9739-c563ee9fb12b",
+										"role",
+										"USER"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Members of a Project",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"e86c57cb-d703-4f39-9632-3782cb5500e8",
+										"members"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check if User is Member of a Project",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/a443ffd0-f7a8-44f6-8ad3-87acd1e91042/exists",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"e86c57cb-d703-4f39-9632-3782cb5500e8",
+										"members",
+										"a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+										"exists"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Members of a Project",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/8d8fa2d7-b999-4e07-9739-c563ee9fb12b/role/ADMIN",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"e86c57cb-d703-4f39-9632-3782cb5500e8",
+										"members",
+										"user",
+										"8d8fa2d7-b999-4e07-9739-c563ee9fb12b",
+										"role",
+										"ADMIN"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove User as Member from Project",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/7c705bfd-e46e-4add-a492-c946ee2b3f3e",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8069",
+									"path": [
+										"api",
+										"projects",
+										"e86c57cb-d703-4f39-9632-3782cb5500e8",
+										"members",
+										"user",
+										"7c705bfd-e46e-4add-a492-c946ee2b3f3e"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Issue",
+			"item": [
+				{
+					"name": "Get all Issues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8069/api/issues",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Issue by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8069/api/issues/a3974d24-5735-410c-b109-ad262755d4d3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"issues",
+								"a3974d24-5735-410c-b109-ad262755d4d3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Issues of a Project by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8069/api/issues/project/e86c57cb-d703-4f39-9632-3782cb5500e8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"issues",
+								"project",
+								"e86c57cb-d703-4f39-9632-3782cb5500e8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Issues assigned to a User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8069/api/issues/user/a443ffd0-f7a8-44f6-8ad3-87acd1e91044",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"issues",
+								"user",
+								"a443ffd0-f7a8-44f6-8ad3-87acd1e91044"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an Issue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectId\": \"e86c57cb-d703-4f39-9632-3782cb5500e8\",\r\n    \"message\": \"Test Issue describing the system's functionality\",\r\n    \"assignedUserId\": \"a443ffd0-f7a8-44f6-8ad3-87acd1e91042\",\r\n    \"deadline\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/api/issues",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Issue",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectId\": \"e86c57cb-d703-4f39-9632-3782cb5500e8\",\r\n    \"message\": \"Das ist eine veränderte Issue-Nachricht\",\r\n    \"assignedUserId\": \"a443ffd0-f7a8-44f6-8ad3-87acd1e91044\",\r\n    \"deadline\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/api/issues/a3974d24-5735-410c-b109-ad262755d4d3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"issues",
+								"a3974d24-5735-410c-b109-ad262755d4d3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Issue",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectId\": \"e86c57cb-d703-4f39-9632-3782cb5500e8\",\r\n    \"message\": \"Das ist eine veränderte Issue-Nachricht\",\r\n    \"assignedUserId\": \"a443ffd0-f7a8-44f6-8ad3-87acd1e91044\",\r\n    \"deadline\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/api/issues/a3974d24-5735-410c-b109-ad262755d4d3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"issues",
+								"a3974d24-5735-410c-b109-ad262755d4d3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login as a User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Peter_Zwegat",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8069/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8069/api/users/a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"users",
+								"a443ffd0-f7a8-44f6-8ad3-87acd1e91042"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test\",\r\n    \"lastName\": \"User\",\r\n    \"email\": \"test.user@mail.com\",\r\n    \"username\": \"TestUser123\",\r\n    \"password\": \"testpassword\",\r\n    \"dateOfBirth\": \"02.08.1998\",\r\n    \"globalRole\": \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test\",\r\n    \"lastName\": \"Userino\",\r\n    \"email\": \"test.userino@mail.com\",\r\n    \"username\": \"TestUserino123\",\r\n    \"password\": \"testpassword\",\r\n    \"dateOfBirth\": \"24.12.1999\",\r\n    \"globalRole\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/api/users/a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"users",
+								"a443ffd0-f7a8-44f6-8ad3-87acd1e91042"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8069/api/users/a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"users",
+								"a443ffd0-f7a8-44f6-8ad3-87acd1e91042"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzZXJ2aWNlLWF1dGgiLCJpZCI6ImE0NDNmZmQwLWY3YTgtNDRmNi04YWQzLTg3YWNkMWU5MTA0MiIsInVzZXJuYW1lIjoiUGV0ZXJfWndlZ2F0IiwicGFzc3dvcmQiOiJ7YmNyeXB0fSQyYSQxMCR0LjNLdWJ0eVhzT0VPOS5lb1dSelRPWk1NVHVpUHZMcmhTZTlZRnpnelYySjhrVnRJT2lMYSIsIm5hbWUiOiJQZXRlciIsImxhc3ROYW1lIjoiWndlZ2F0IiwiZW1haWwiOiJwZXRlci56d2VnYXRAbW5pLnRobS5kZSIsImRhdGVPZkJpcnRoIjoxNjI3Nzc2MDAwMDAwLCJjcmVhdGVUaW1lIjoxNjI3ODQ2NTA1MzkyLCJnbG9iYWxSb2xlIjoiQURNSU4iLCJsYXN0TG9naW4iOjE2Mjc4NDY1MDUzOTIsImlhdCI6MTYyNzg0NjUyMywiZXhwIjoxNjI3ODUyNTIzfQ.h-pFq_RWEf1r7XDaRuVaQ0DYDWV20DITxH4silwQz9dTMvKxKaRd4lHsC3snbKQaDqPxIQkx-PCM0Zpj8nzCQA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
