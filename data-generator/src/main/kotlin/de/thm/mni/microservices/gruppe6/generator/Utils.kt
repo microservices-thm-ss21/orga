@@ -4,6 +4,7 @@ import de.thm.mni.microservices.gruppe6.generator.gen.Generator
 import de.thm.mni.microservices.gruppe6.generator.classes.projectService.ProjectRole
 import de.thm.mni.microservices.gruppe6.generator.classes.userService.GlobalRole
 import kotlinx.coroutines.*
+import org.slf4j.Logger
 import org.springframework.stereotype.Service
 import java.time.Duration
 import java.time.Instant
@@ -39,12 +40,12 @@ class Utils {
         return list.subList(fromIndex, lastIndex)
     }
 
-    fun start(generator: Generator<out Any>, speed: Long, noRandom: Boolean): Job {
+    fun start(generator: Generator<out Any>, speed: Long, noRandom: Boolean, logger: Logger): Job {
         return GlobalScope.launch {
             while (true) {
                 if (!noRandom) delay(Random.nextLong((speed * 0.67).toLong(), (speed * 1.34).toLong()))
                 else delay(speed)
-                generator.genSingleRandom(null).subscribe()
+                generator.genSingleRandom(logger, false).subscribe()
             }
         }
     }

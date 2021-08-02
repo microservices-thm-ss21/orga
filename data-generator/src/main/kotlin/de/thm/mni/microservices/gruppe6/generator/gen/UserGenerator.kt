@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient
 import de.thm.mni.microservices.gruppe6.generator.classes.userService.User
 import de.thm.mni.microservices.gruppe6.generator.classes.userService.UserDTO
 import org.slf4j.Logger
+import org.springframework.http.HttpStatus
 import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
@@ -45,9 +46,9 @@ class UserGenerator(private val utils: Utils): Generator<User> {
         ))
     }
 
-    override fun genSingleRandom(logger: Logger?): Mono<User> {
+    override fun genSingleRandom(logger: Logger, verbose: Boolean): Mono<User> {
         if(logins.isEmpty()) {
-            logger?.error("Generating Users requires at least one logged in user")
+            logger.error("Generating Users requires at least one logged in user")
             return Mono.empty()
         }
         val creatorTup = logins.random()
@@ -63,22 +64,27 @@ class UserGenerator(private val utils: Utils): Generator<User> {
         return webClient.post().bodyValue(userDTO)
             .header("Authorization", "Bearer ${creatorTup.second}")
             .exchangeToMono {
-            it.bodyToMono(User::class.java)
-                .map { user->
-                sink.next(user)
-                logger?.info(user.id.toString())
-                user
+                if(it.statusCode() != HttpStatus.OK) {
+                    logger.error("Error Code ${it.statusCode()} on user creation")
+                    Mono.empty()
+                }
+                else
+                    it.bodyToMono(User::class.java)
+                        .map { user->
+                            sink.next(user)
+                            if(verbose)logger.info(user.id.toString())
+                            user
+                        }
             }
-        }
     }
 
     override fun stop() {
         thread.cancel()
     }
 
-    override fun start(speed: Long, noRandom: Boolean) {
+    override fun start(speed: Long, noRandom: Boolean, logger: Logger) {
         if(this::thread.isInitialized && thread.isActive) thread.cancel()
-        thread = utils.start(this, speed, noRandom)
+        thread = utils.start(this, speed, noRandom, logger)
     }
 
 }

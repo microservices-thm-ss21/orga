@@ -2,9 +2,11 @@ package de.thm.mni.microservices.gruppe6.generator.gen
 
 import de.thm.mni.microservices.gruppe6.generator.ServiceAddress
 import de.thm.mni.microservices.gruppe6.generator.Utils
+import de.thm.mni.microservices.gruppe6.generator.classes.projectService.Project
 import de.thm.mni.microservices.gruppe6.generator.classes.userService.User
 import kotlinx.coroutines.Job
 import org.slf4j.Logger
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import java.util.Base64
 import org.springframework.web.reactive.function.client.WebClient
@@ -27,37 +29,42 @@ class LoginGen(private val utils: Utils): Generator<String> {
         loginGeneratorFlux = Flux.create { sink = it }
     }
 
-    fun loginUser(user: User, logger: Logger?): Mono<String> {
+    fun loginUser(user: User, logger: Logger, verbose: Boolean): Mono<String> {
         val auth = Base64.getEncoder().encode(("${user.username}:${user.password}").toByteArray()).toString(Charsets.UTF_8)
         return webClient.get()
             .header("Authorization", "Basic $auth")
             .exchangeToMono {
+                if(it.statusCode() != HttpStatus.OK) {
+                    logger.error("Error Code ${it.statusCode()} on login")
+                    Mono.empty()
+                }
+                else
                     Mono.just(
                         it.headers()
                             .header("authorization")[0].substring("Bearer ".length))}
             .map {
                 sink.next(Pair(user.id!!,it))
-                logger?.info(user.id.toString())
+                if(verbose)logger.info(user.id.toString())
                 it
             }
     }
 
 
-    override fun genSingleRandom(logger: Logger?): Mono<String> {
+    override fun genSingleRandom(logger: Logger, verbose: Boolean): Mono<String> {
         if(users.isEmpty()) {
-            logger?.error("Logging in requires at least one user")
+            logger.error("Logging in requires at least one user")
             return Mono.empty()
         }
-        return loginUser(users.random(), logger)
+        return loginUser(users.random(), logger, verbose)
     }
 
     override fun stop() {
         thread.cancel()
     }
 
-    override fun start(speed: Long, noRandom: Boolean) {
+    override fun start(speed: Long, noRandom: Boolean, logger: Logger) {
         if(this::thread.isInitialized && thread.isActive) thread.cancel()
-        thread = utils.start(this, speed, noRandom)
+        thread = utils.start(this, speed, noRandom, logger)
     }
 
 

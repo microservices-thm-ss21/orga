@@ -4,7 +4,7 @@ import reactor.core.publisher.Mono
 import org.slf4j.Logger
 
 interface Generator<T> {
-    fun genSingleRandom(logger: Logger?): Mono<T>
-    fun start(speed: Long, noRandom: Boolean)
+    fun genSingleRandom(logger: Logger, verbose: Boolean): Mono<T>
+    fun start(speed: Long, noRandom: Boolean, logger: Logger)
     fun stop()
 }

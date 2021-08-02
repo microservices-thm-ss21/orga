@@ -58,8 +58,8 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
     @ShellMethod("Creates default objects to make sure everything is ready to work", group = "General")
     fun setup(){
         userGen.setup()
-        loginGen.genSingleRandom(logger).flatMap {
-            projectGen.genSingleRandom(logger)
+        loginGen.genSingleRandom(logger, true).flatMap {
+            projectGen.genSingleRandom(logger, true)
         }
         .subscribe()
     }
@@ -69,9 +69,9 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
     fun gen(@ShellOption(defaultValue = "all") type: String, @ShellOption(defaultValue = "5000") speed: Long, noRandom: Boolean){
         when {
             type == "all" -> generators.values.forEach{
-                it.start(speed, noRandom)
+                it.start(speed, noRandom, logger)
             }
-            generators.containsKey(type) -> generators[type]?.start(speed, noRandom)
+            generators.containsKey(type) -> generators[type]?.start(speed, noRandom, logger)
             else -> logger.error("Unrecognized type: $type")
         }
     }
@@ -91,54 +91,10 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
     fun create(type: String){
         when {
             type == "all" -> generators.values.forEach{
-                it.genSingleRandom(logger).subscribe()
+                it.genSingleRandom(logger, true).subscribe()
             }
-            generators.containsKey(type) -> generators[type]?.genSingleRandom(logger)?.subscribe()
+            generators.containsKey(type) -> generators[type]?.genSingleRandom(logger, true)?.subscribe()
             else -> logger.error("Unrecognized type: $type")
         }
-    }
-
-    /*
-    DELETE CODE BELOW AFTER REVIEW!
-     */
-
-    @ShellMethod("Generate random project.", group = "Project")
-    fun createProject() {
-        if(users.isEmpty()){
-            logger.info("Generating Project requires at least one user: Creating")
-            createUser()
-        }
-        projectGen.genSingleRandom(logger).subscribe()
-    }
-
-    @ShellMethod("Generate random projects.", group = "Project")
-    fun genProjects(@ShellOption(defaultValue = "5000") speed: Long, noRandom: Boolean) {
-        if(users.isEmpty()){
-            logger.info("Generating Project requires at least one user: Creating")
-            createUser()
-        }
-        userGen.start(speed, noRandom)
-    }
-
-    @ShellMethod("Stop generating random projects.", group = "Project")
-    fun stopProjects() {
-        userGen.stop()
-    }
-
-
-
-    @ShellMethod("Generate random user.", group = "User")
-    fun createUser() {
-        userGen.genSingleRandom(logger).subscribe()
-    }
-
-    @ShellMethod("Generate random users.", group = "User")
-    fun genUsers(@ShellOption(defaultValue = "5000") speed: Long, noRandom: Boolean) {
-        userGen.start(speed, noRandom)
-    }
-
-    @ShellMethod("Stop generating random users.", group = "User")
-    fun stopUsers() {
-        userGen.stop()
     }
 }
