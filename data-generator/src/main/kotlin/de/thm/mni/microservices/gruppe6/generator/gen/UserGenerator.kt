@@ -1,8 +1,8 @@
 package de.thm.mni.microservices.gruppe6.generator.gen
 
+import com.github.javafaker.Faker
 import de.thm.mni.microservices.gruppe6.generator.ServiceAddress
 import de.thm.mni.microservices.gruppe6.generator.Utils
-//import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.random.Random
 
 @Service
 class UserGenerator(private val utils: Utils): Generator<User> {
@@ -23,7 +24,7 @@ class UserGenerator(private val utils: Utils): Generator<User> {
     final val userGeneratorFlux: Flux<User>
     private val webClient = WebClient.create(ServiceAddress.USER.toString())
     final val logins: MutableList<Pair<UUID, String>> = mutableListOf()
-    //val faker = Faker()
+    private val faker = Faker()
     private lateinit var thread: Job
     private lateinit var sink: FluxSink<User>
 
@@ -54,12 +55,12 @@ class UserGenerator(private val utils: Utils): Generator<User> {
         val creatorTup = logins.random()
 
         val userDTO = UserDTO()
-        userDTO.name = "Random" //faker.name.firstName()
-        userDTO.password = "Random" //faker.device.serial()
-        userDTO.lastName = "Random" //faker.name.lastName()
+        userDTO.name = faker.name().firstName()
+        userDTO.password = UUID.randomUUID().toString()
+        userDTO.lastName = faker.name().lastName()
         userDTO.dateOfBirth = utils.randomDate()
-        userDTO.email = "Random" //"${faker.rickAndMorty.characters()}@gmail.com"
-        userDTO.username = "Random" //faker.swordArtOnline.gameName()
+        userDTO.email = "${faker.rickAndMorty().character()}@gmail.com"
+        userDTO.username = "${faker.elderScrolls().firstName()}${faker.elderScrolls().lastName()}${Random.nextInt(1, 9999)}"
         userDTO.globalRole = utils.randomGlobalRole()
         return webClient.post().bodyValue(userDTO)
             .header("Authorization", "Bearer ${creatorTup.second}")

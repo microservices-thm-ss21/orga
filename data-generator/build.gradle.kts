@@ -26,7 +26,7 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.springframework.shell:spring-shell-starter:2.0.1.RELEASE")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("io.github.serpro69:kotlin-faker:1.7.1")
+    implementation("com.github.javafaker:javafaker:1.0.2")
 }
 
 tasks.withType<KotlinCompile> {
