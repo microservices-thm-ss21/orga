@@ -7,3 +7,5 @@ build
 grafana/lib/grafana.db
 
 .idea
+
+spring-shell.log
