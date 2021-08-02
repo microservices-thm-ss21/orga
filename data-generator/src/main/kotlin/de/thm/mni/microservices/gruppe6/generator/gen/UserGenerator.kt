@@ -2,7 +2,7 @@ package de.thm.mni.microservices.gruppe6.generator.gen
 
 import de.thm.mni.microservices.gruppe6.generator.ServiceAddress
 import de.thm.mni.microservices.gruppe6.generator.Utils
-import io.github.serpro69.kfaker.Faker
+//import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
@@ -18,7 +18,7 @@ class UserGenerator(private val utils: Utils): Generator<User> {
 
     final val userGeneratorFlux: Flux<User>
     private val webClient = WebClient.create(ServiceAddress.USER.toString())
-    val faker = Faker()
+    //val faker = Faker()
     private lateinit var thread: Job
     private lateinit var sink: FluxSink<User>
 
@@ -28,12 +28,12 @@ class UserGenerator(private val utils: Utils): Generator<User> {
 
     override fun genSingleRandom(logger: Logger?): Mono<User> {
         val userDTO = UserDTO()
-        userDTO.name = faker.name.firstName()
-        userDTO.password = faker.device.serial()
-        userDTO.lastName = faker.name.lastName()
+        userDTO.name = "Random" //faker.name.firstName()
+        userDTO.password = "Random" //faker.device.serial()
+        userDTO.lastName = "Random" //faker.name.lastName()
         userDTO.dateOfBirth = utils.randomDate()
-        userDTO.email = "${faker.rickAndMorty.characters()}@gmail.com"
-        userDTO.username = faker.swordArtOnline.gameName()
+        userDTO.email = "Random" //"${faker.rickAndMorty.characters()}@gmail.com"
+        userDTO.username = "Random" //faker.swordArtOnline.gameName()
         userDTO.globalRole = utils.randomGlobalRole()
         return webClient.post().bodyValue(userDTO).exchangeToMono {
             it.bodyToMono(User::class.java)

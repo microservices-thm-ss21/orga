@@ -3,7 +3,7 @@ package de.thm.mni.microservices.gruppe6.generator.gen
 import de.thm.mni.microservices.gruppe6.generator.ServiceAddress
 import de.thm.mni.microservices.gruppe6.generator.Utils
 import org.slf4j.Logger
-import io.github.serpro69.kfaker.Faker
+//import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
@@ -24,7 +24,7 @@ class ProjectGenerator(private val utils: Utils, private val loginGen: LoginGen)
 
     private val baseUrl = ServiceAddress.PROJECT.toString()
     private val webClient = WebClient.create(baseUrl)
-    val faker = Faker()
+    //val faker = Faker()
     private lateinit var thread: Job
     private lateinit var projectSink: FluxSink<Project>
     private lateinit var memberSink: FluxSink<Triple<UUID, ProjectRole, UUID>>
@@ -40,7 +40,7 @@ class ProjectGenerator(private val utils: Utils, private val loginGen: LoginGen)
             return Mono.empty()
         }
 
-        val projectName = faker.company.name()
+        val projectName = "Random" //faker.company.name()
         val creator = users.random()
         val creatorJWT = loginGen.loginUser(creator, logger)
 
