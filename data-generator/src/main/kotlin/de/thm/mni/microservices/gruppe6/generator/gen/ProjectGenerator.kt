@@ -9,18 +9,17 @@ import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import de.thm.mni.microservices.gruppe6.generator.classes.projectService.Project
 import de.thm.mni.microservices.gruppe6.generator.classes.projectService.ProjectRole
-import de.thm.mni.microservices.gruppe6.generator.classes.userService.User
 import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono
 import java.util.*
 
 @Service
-class ProjectGenerator(private val utils: Utils, private val loginGen: LoginGen): Generator<Project> {
+class ProjectGenerator(private val utils: Utils): Generator<Project> {
 
     final val projectGeneratorFlux: Flux<Project>
     final val memberGeneratorFlux: Flux<Triple<UUID, ProjectRole, UUID>>
-    final val users: MutableList<User> = mutableListOf()
+    final val logins: MutableList<Pair<UUID, String>> = mutableListOf()
 
     private val baseUrl = ServiceAddress.PROJECT.toString()
     private val webClient = WebClient.create(baseUrl)
@@ -35,23 +34,22 @@ class ProjectGenerator(private val utils: Utils, private val loginGen: LoginGen)
     }
 
     override fun genSingleRandom(logger: Logger?): Mono<Project> {
-        if(users.isEmpty()) {
-            logger?.error("Generating Project requires at least one user")
+        if(logins.isEmpty()) {
+            logger?.error("Generating Project requires at least one logged in user")
             return Mono.empty()
         }
 
         val projectName = "Random" //faker.company.name()
-        val creator = users.random()
-        val creatorJWT = loginGen.loginUser(creator, logger)
+        val creatorTup = logins.random()
 
         return webClient.post()
             .uri("$baseUrl/$projectName")
-            .header("Authorization", "Bearer $creatorJWT")
+            .header("Authorization", "Bearer ${creatorTup.second}")
             .exchangeToMono {
                 it.bodyToMono(Project::class.java)
             }
             .map {
-                memberSink.next(Triple(it.id!!, ProjectRole.ADMIN, creator.id!!))
+                memberSink.next(Triple(it.id!!, ProjectRole.ADMIN, creatorTup.first))
                 projectSink.next(it)
                 logger?.info(it.id.toString())
                 it

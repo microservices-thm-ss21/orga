@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod
 import org.springframework.shell.standard.ShellOption
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 @ShellComponent
@@ -23,7 +25,7 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
     private val projects: MutableList<Project> = mutableListOf()
     // ProjectID -> ProjectRole -> List of userIDs associated with this role
     private val members: MutableMap<UUID, MutableMap<ProjectRole, MutableList<UUID>>> = mutableMapOf()
-    private val logins: MutableList<String> = mutableListOf()
+    private val logins: MutableList<Pair<UUID,String>> = mutableListOf()
 
     private val generators: MutableMap<String, Generator<out Any>> = mutableMapOf(
         Pair("login", loginGen),
@@ -34,11 +36,14 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
     init {
         userGen.userGeneratorFlux.subscribe{
             users.add(it)
-            projectGen.users.add(it)
             loginGen.users.add(it)
         }
 
-        loginGen.loginGeneratorFlux.subscribe(logins::add)
+        loginGen.loginGeneratorFlux.subscribe{
+            projectGen.logins.add(it)
+            userGen.logins.add(it)
+            logins.add(it)
+        }
         projectGen.projectGeneratorFlux.subscribe(projects::add)
 
         projectGen.memberGeneratorFlux.subscribe{
@@ -49,6 +54,16 @@ class Commands(private val userGen: UserGenerator, private val projectGen: Proje
                 .add(it.third)
         }
     }
+
+    @ShellMethod("Creates default objects to make sure everything is ready to work", group = "General")
+    fun setup(){
+        userGen.setup()
+        loginGen.genSingleRandom(logger).flatMap {
+            projectGen.genSingleRandom(logger)
+        }
+        .subscribe()
+    }
+
 
     @ShellMethod("Starts all or specific generator", group = "General")
     fun gen(@ShellOption(defaultValue = "all") type: String, @ShellOption(defaultValue = "5000") speed: Long, noRandom: Boolean){
