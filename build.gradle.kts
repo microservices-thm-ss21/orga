@@ -19,36 +19,39 @@ repositories {
 }
 
 tasks.register("buildAll") {
-    dependsOn("publishServiceLib", "buildIssueService", "buildProjectService", "buildUserService", "buildNewsService", "buildGateway")
+    dependsOn("publishServiceLibMaven", "buildIssueService", "buildProjectService", "buildUserService", "buildNewsService", "buildGateway")
 }
 
 tasks.register("buildGateway", GradleBuild::class) {
-    this.shouldRunAfter("publishServiceLib")
+    this.shouldRunAfter("publishServiceLibMaven")
     description = "Build Gateway"
     buildFile = File("../gateway/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildIssueService", GradleBuild::class) {
-    this.shouldRunAfter("publishServiceLib")
+    this.shouldRunAfter("publishServiceLibMaven")
     description = "Build IssueService"
     buildFile = File("../issue-service/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildProjectService", GradleBuild::class) {
+    this.shouldRunAfter("publishServiceLibMaven")
     description = "Build ProjectService"
     buildFile = File("../project-service/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildUserService", GradleBuild::class) {
+    this.shouldRunAfter("publishServiceLibMaven")
     description = "Build UserService"
     buildFile = File("../user-service/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildNewsService", GradleBuild::class) {
+    this.shouldRunAfter("publishServiceLibMaven")
     description = "Build NewsService"
     buildFile = File("../news-service/build.gradle.kts")
     tasks = listOf("clean", "build")
@@ -58,6 +61,11 @@ tasks.register("publishServiceLib", GradleBuild::class) {
     description = "Shortcut to publish service-lib"
     buildFile = File("../service-lib/lib/build.gradle.kts")
     tasks = listOf("clean", "publish")
+}
+
+tasks.register("publishServiceLibMaven", Exec::class) {
+    workingDir = File("../service-lib")
+    commandLine = listOf("./mvnw", "clean", "install")
 }
 
 task("checkoutMaster") {
