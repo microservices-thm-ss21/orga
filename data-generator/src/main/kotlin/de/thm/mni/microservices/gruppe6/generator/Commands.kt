@@ -4,9 +4,9 @@ import de.thm.mni.microservices.gruppe6.generator.gen.Generator
 import de.thm.mni.microservices.gruppe6.generator.gen.LoginGen
 import de.thm.mni.microservices.gruppe6.generator.gen.ProjectGenerator
 import de.thm.mni.microservices.gruppe6.generator.gen.UserGenerator
-import de.thm.mni.microservices.gruppe6.lib.classes.projectService.Project
-import de.thm.mni.microservices.gruppe6.lib.classes.projectService.ProjectRole
-import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
+import de.thm.mni.microservices.gruppe6.generator.classes.projectService.Project
+import de.thm.mni.microservices.gruppe6.generator.classes.projectService.ProjectRole
+import de.thm.mni.microservices.gruppe6.generator.classes.userService.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.shell.standard.ShellComponent

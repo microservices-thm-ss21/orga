@@ -7,9 +7,9 @@ import org.slf4j.Logger
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
-import de.thm.mni.microservices.gruppe6.lib.classes.projectService.Project
-import de.thm.mni.microservices.gruppe6.lib.classes.projectService.ProjectRole
-import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
+import de.thm.mni.microservices.gruppe6.generator.classes.projectService.Project
+import de.thm.mni.microservices.gruppe6.generator.classes.projectService.ProjectRole
+import de.thm.mni.microservices.gruppe6.generator.classes.userService.User
 import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink
 import reactor.core.publisher.Mono

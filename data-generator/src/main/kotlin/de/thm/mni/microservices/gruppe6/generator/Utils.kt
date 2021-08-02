@@ -1,8 +1,8 @@
 package de.thm.mni.microservices.gruppe6.generator
 
 import de.thm.mni.microservices.gruppe6.generator.gen.Generator
-import de.thm.mni.microservices.gruppe6.lib.classes.projectService.ProjectRole
-import de.thm.mni.microservices.gruppe6.lib.classes.userService.GlobalRole
+import de.thm.mni.microservices.gruppe6.generator.classes.projectService.ProjectRole
+import de.thm.mni.microservices.gruppe6.generator.classes.userService.GlobalRole
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import java.time.Duration

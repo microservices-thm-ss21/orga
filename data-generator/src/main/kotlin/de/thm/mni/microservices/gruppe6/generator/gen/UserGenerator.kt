@@ -6,8 +6,8 @@ import de.thm.mni.microservices.gruppe6.generator.Utils
 import kotlinx.coroutines.*
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
-import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
-import de.thm.mni.microservices.gruppe6.lib.classes.userService.UserDTO
+import de.thm.mni.microservices.gruppe6.generator.classes.userService.User
+import de.thm.mni.microservices.gruppe6.generator.classes.userService.UserDTO
 import org.slf4j.Logger
 import reactor.core.publisher.Flux
 import reactor.core.publisher.FluxSink

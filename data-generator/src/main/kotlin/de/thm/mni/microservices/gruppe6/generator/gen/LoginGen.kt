@@ -2,7 +2,7 @@ package de.thm.mni.microservices.gruppe6.generator.gen
 
 import de.thm.mni.microservices.gruppe6.generator.ServiceAddress
 import de.thm.mni.microservices.gruppe6.generator.Utils
-import de.thm.mni.microservices.gruppe6.lib.classes.userService.User
+import de.thm.mni.microservices.gruppe6.generator.classes.userService.User
 import kotlinx.coroutines.Job
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
