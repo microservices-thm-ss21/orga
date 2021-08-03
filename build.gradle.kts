@@ -19,39 +19,39 @@ repositories {
 }
 
 tasks.register("buildAll") {
-    dependsOn("publishServiceLibMaven", "buildIssueService", "buildProjectService", "buildUserService", "buildNewsService", "buildGateway")
+    dependsOn("publishServiceLib", "buildIssueService", "buildProjectService", "buildUserService", "buildNewsService", "buildGateway")
 }
 
 tasks.register("buildGateway", GradleBuild::class) {
-    this.shouldRunAfter("publishServiceLibMaven")
+    this.shouldRunAfter("publishServiceLib")
     description = "Build Gateway"
     buildFile = File("../gateway/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildIssueService", GradleBuild::class) {
-    this.shouldRunAfter("publishServiceLibMaven")
+    this.shouldRunAfter("publishServiceLib")
     description = "Build IssueService"
     buildFile = File("../issue-service/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildProjectService", GradleBuild::class) {
-    this.shouldRunAfter("publishServiceLibMaven")
+    this.shouldRunAfter("publishServiceLib")
     description = "Build ProjectService"
     buildFile = File("../project-service/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildUserService", GradleBuild::class) {
-    this.shouldRunAfter("publishServiceLibMaven")
+    this.shouldRunAfter("publishServiceLib")
     description = "Build UserService"
     buildFile = File("../user-service/build.gradle.kts")
     tasks = listOf("clean", "build")
 }
 
 tasks.register("buildNewsService", GradleBuild::class) {
-    this.shouldRunAfter("publishServiceLibMaven")
+    this.shouldRunAfter("publishServiceLib")
     description = "Build NewsService"
     buildFile = File("../news-service/build.gradle.kts")
     tasks = listOf("clean", "build")
