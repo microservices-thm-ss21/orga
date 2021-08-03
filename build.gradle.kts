@@ -65,10 +65,11 @@ tasks.register("publishServiceLib", GradleBuild::class) {
 }
 
 tasks.register("publishServiceLibMaven", Exec::class) {
-    workingDir = File("../service-lib")
     if (OperatingSystem.current().isWindows) {
-        commandLine = listOf(".\\mvnw.cmd", "clean", "install")
+        workingDir = File("../service-lib")
+        commandLine = listOf("cmd", "/c", "mvnw.cmd", "clean", "install")
     } else {
+        workingDir = File("../service-lib")
         commandLine = listOf("./mvnw", "clean", "install")
     }
 }
