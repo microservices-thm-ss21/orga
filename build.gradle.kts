@@ -12,7 +12,8 @@ val repos = mapOf(
     Pair("project-service", Pair("../project-service", "git@git.thm.de:microservicesss21/project-service.git")),
     Pair("user-service", Pair("../user-service", "git@git.thm.de:microservicesss21/user-service.git")),
     Pair("news-service", Pair("../news-service", "git@git.thm.de:microservicesss21/news-service.git")),
-    Pair("gateway", Pair("../gateway", "git@git.thm.de:microservicesss21/gateway.git"))
+    Pair("gateway", Pair("../gateway", "git@git.thm.de:microservicesss21/gateway.git")),
+    Pair("stresstest-gatling", Pair("../stresstest-gatling", "git@git.thm.de:microservicesss21/gatling-service.git"))
 )
 
 repositories {

@@ -21,6 +21,7 @@ repositories {
 }
 
 dependencies {
+    implementation("io.gatling:gatling-maven-plugin:3.1.1")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
