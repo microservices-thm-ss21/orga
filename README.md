@@ -21,6 +21,6 @@ Use the following commands to do so:
 All services should start. You can test the services by using their api. The apis are documented [here](https://git.thm.de/microservicesss21/orga/-/tree/master/doc/apis).
 
 ## Architecture
-![architecture](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/diagrams/Architecture_Diagram.pdf "Architecure of the ticket system")
-![events](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/diagrams/Event_Diagram.pdf "Event management of the ticket system")
 
+You can find an architecture overview [here](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/diagrams/Architecture_Diagram.pdf).
+The microservices communicate over MessageMQ. An overview of this communication can be found [here](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/diagrams/Event_Diagram.pdf).
