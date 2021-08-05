@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: API Specification for News-Service
+  description: API Specification for News-Service
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8069/api/news'
+paths:
+  /:
+    get:
+      description: Returns all saved DataNews and DomainNews.
+      responses:
+        '200':
+          description: News
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfNews'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                type: string
+  /admin/all:
+    get:
+      description: Returns all News saved. ADMIN only.
+      responses:
+        '200':
+          description: List of News
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfNews'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                type: string
+
+security:
+  - bearerAuth: [ ]
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+  schemas:
+    News:
+      type: object
+      properties:
+        eventCode:
+          type: string
+        eventData:
+          type: object
+        issueId:
+          type: string
+          nullable: true
+          format: uuid
+        projectId:
+          type: string
+          nullable: true
+          format: uuid
+        userId:
+          type: string
+          nullable: true
+          format: uuid
+        newsId:
+          type: string
+          format: uuid
+        timestamp:
+          type: string
+          nullable: true
+
+    ArrayOfNews:
+      type: array
+      items:
+        $ref: '#/components/schemas/News'
