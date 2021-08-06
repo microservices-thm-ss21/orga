@@ -60,7 +60,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8069/api/projects/e42e93d1-56dc-4687-9039-beb25dc1732a",
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -69,7 +69,7 @@
 									"path": [
 										"api",
 										"projects",
-										"e42e93d1-56dc-4687-9039-beb25dc1732a"
+										"e86c57cb-d703-4f39-9632-3782cb5500e8"
 									]
 								}
 							},
@@ -169,7 +169,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/18525d18-76d9-4057-ace0-7a69c8cc0907/role/USER",
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/a443ffd0-f7a8-44f6-8ad3-87acd1e91043/role/USER",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -181,7 +181,7 @@
 										"e86c57cb-d703-4f39-9632-3782cb5500e8",
 										"members",
 										"user",
-										"18525d18-76d9-4057-ace0-7a69c8cc0907",
+										"a443ffd0-f7a8-44f6-8ad3-87acd1e91043",
 										"role",
 										"USER"
 									]
@@ -217,7 +217,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/a443ffd0-f7a8-44f6-8ad3-87acd1e91042/exists",
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/a443ffd0-f7a8-44f6-8ad3-87acd1e91043/exists",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -228,7 +228,7 @@
 										"projects",
 										"e86c57cb-d703-4f39-9632-3782cb5500e8",
 										"members",
-										"a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+										"a443ffd0-f7a8-44f6-8ad3-87acd1e91043",
 										"exists"
 									]
 								}
@@ -250,7 +250,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/8d8fa2d7-b999-4e07-9739-c563ee9fb12b/role/ADMIN",
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/a443ffd0-f7a8-44f6-8ad3-87acd1e91043/role/ADMIN",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -262,7 +262,7 @@
 										"e86c57cb-d703-4f39-9632-3782cb5500e8",
 										"members",
 										"user",
-										"8d8fa2d7-b999-4e07-9739-c563ee9fb12b",
+										"a443ffd0-f7a8-44f6-8ad3-87acd1e91043",
 										"role",
 										"ADMIN"
 									]
@@ -276,7 +276,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/7c705bfd-e46e-4add-a492-c946ee2b3f3e",
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/a443ffd0-f7a8-44f6-8ad3-87acd1e91043",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -288,7 +288,7 @@
 										"e86c57cb-d703-4f39-9632-3782cb5500e8",
 										"members",
 										"user",
-										"7c705bfd-e46e-4add-a492-c946ee2b3f3e"
+										"a443ffd0-f7a8-44f6-8ad3-87acd1e91043"
 									]
 								}
 							},
@@ -422,7 +422,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"projectId\": \"e86c57cb-d703-4f39-9632-3782cb5500e8\",\r\n    \"message\": \"Das ist eine veränderte Issue-Nachricht\",\r\n    \"assignedUserId\": \"a443ffd0-f7a8-44f6-8ad3-87acd1e91044\",\r\n    \"deadline\": null\r\n}",
+							"raw": "{\r\n    \"projectId\": \"e86c57cb-d703-4f39-9632-3782cb5500e8\",\r\n    \"message\": \"Test Issue describing the system's functionality\",\r\n    \"assignedUserId\": \"a443ffd0-f7a8-44f6-8ad3-87acd1e91044\",\r\n    \"deadline\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -430,7 +430,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8069/api/issues/a3974d24-5735-410c-b109-ad262755d4d3",
+							"raw": "http://localhost:8069/api/issues/956521da-713d-457c-a7bf-4ba22c80c30f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -439,7 +439,7 @@
 							"path": [
 								"api",
 								"issues",
-								"a3974d24-5735-410c-b109-ad262755d4d3"
+								"956521da-713d-457c-a7bf-4ba22c80c30f"
 							]
 						}
 					},
@@ -490,13 +490,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "username",
-									"value": "Peter_Zwegat",
+									"key": "password",
+									"value": "testpassword",
 									"type": "string"
 								},
 								{
-									"key": "password",
-									"value": "password",
+									"key": "username",
+									"value": "TestUser123",
 									"type": "string"
 								}
 							]
@@ -581,7 +581,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Test\",\r\n    \"lastName\": \"User\",\r\n    \"email\": \"test.user@mail.com\",\r\n    \"username\": \"TestUser123\",\r\n    \"password\": \"testpassword\",\r\n    \"dateOfBirth\": \"02.08.1998\",\r\n    \"globalRole\": \"USER\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Test\",\r\n    \"lastName\": \"User\",\r\n    \"email\": \"test.user@mail.com\",\r\n    \"username\": \"TestUser123\",\r\n    \"password\": \"testpassword\",\r\n    \"dateOfBirth\": \"02.08.1998\",\r\n    \"globalRole\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -618,7 +618,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8069/api/users/a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+							"raw": "http://localhost:8069/api/users/f9330ad4-5803-4bd4-be9f-14428cb7467f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -627,7 +627,7 @@
 							"path": [
 								"api",
 								"users",
-								"a443ffd0-f7a8-44f6-8ad3-87acd1e91042"
+								"f9330ad4-5803-4bd4-be9f-14428cb7467f"
 							]
 						}
 					},
@@ -639,7 +639,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8069/api/users/a443ffd0-f7a8-44f6-8ad3-87acd1e91042",
+							"raw": "http://localhost:8069/api/users/12e931f7-473d-4746-8010-0cf6bc6eca90",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -648,7 +648,92 @@
 							"path": [
 								"api",
 								"users",
-								"a443ffd0-f7a8-44f6-8ad3-87acd1e91042"
+								"12e931f7-473d-4746-8010-0cf6bc6eca90"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News-Service",
+			"item": [
+				{
+					"name": "Get News",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/api/news",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all News (only Admin User)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8069/api/news/admin/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8069",
+							"path": [
+								"api",
+								"news",
+								"admin",
+								"all"
 							]
 						}
 					},
@@ -662,7 +747,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzZXJ2aWNlLWF1dGgiLCJpZCI6ImE0NDNmZmQwLWY3YTgtNDRmNi04YWQzLTg3YWNkMWU5MTA0MiIsInVzZXJuYW1lIjoiUGV0ZXJfWndlZ2F0IiwicGFzc3dvcmQiOiJ7YmNyeXB0fSQyYSQxMCR0LjNLdWJ0eVhzT0VPOS5lb1dSelRPWk1NVHVpUHZMcmhTZTlZRnpnelYySjhrVnRJT2lMYSIsIm5hbWUiOiJQZXRlciIsImxhc3ROYW1lIjoiWndlZ2F0IiwiZW1haWwiOiJwZXRlci56d2VnYXRAbW5pLnRobS5kZSIsImRhdGVPZkJpcnRoIjoxNjI4MjA4MDAwMDAwLCJjcmVhdGVUaW1lIjoxNjI4MjU0MTg3NzA3LCJnbG9iYWxSb2xlIjoiQURNSU4iLCJsYXN0TG9naW4iOjE2MjgyNTQxODc3MDcsImlhdCI6MTYyODI1NDIxMCwiZXhwIjoxNjI4MjYwMjEwfQ.0XbNPRx1Vd-7YtxgOBpDFRWMTZMLBTgzVeYe4s5536mIY0LzSf4yYVg4WiPb1nnGyjlz4DCKQ33LioQx6puppA",
 				"type": "string"
 			}
 		]
