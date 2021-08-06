@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3cebc734-0bda-483a-a8dc-1584ba75beae",
+		"_postman_id": "902c9cc4-5bfa-4f58-826b-e7d121aebd9e",
 		"name": "Micro-Services",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -60,7 +60,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8069/api/projects/user/project/e42e93d1-56dc-4687-9039-beb25dc1732a",
+									"raw": "http://localhost:8069/api/projects/e42e93d1-56dc-4687-9039-beb25dc1732a",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -69,8 +69,6 @@
 									"path": [
 										"api",
 										"projects",
-										"user",
-										"project",
 										"e42e93d1-56dc-4687-9039-beb25dc1732a"
 									]
 								}
@@ -84,7 +82,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Hauptsache es Funzt - Projekt\",\r\n    \"members\": []\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -92,7 +90,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8069/api/projects/",
+									"raw": "http://localhost:8069/api/projects/Erstelltes Test-Projekt",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -101,7 +99,7 @@
 									"path": [
 										"api",
 										"projects",
-										""
+										"Erstelltes Test-Projekt"
 									]
 								}
 							},
@@ -171,7 +169,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/8d8fa2d7-b999-4e07-9739-c563ee9fb12b/role/USER",
+									"raw": "http://localhost:8069/api/projects/e86c57cb-d703-4f39-9632-3782cb5500e8/members/user/18525d18-76d9-4057-ace0-7a69c8cc0907/role/USER",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -183,7 +181,7 @@
 										"e86c57cb-d703-4f39-9632-3782cb5500e8",
 										"members",
 										"user",
-										"8d8fa2d7-b999-4e07-9739-c563ee9fb12b",
+										"18525d18-76d9-4057-ace0-7a69c8cc0907",
 										"role",
 										"USER"
 									]
@@ -301,7 +299,7 @@
 			]
 		},
 		{
-			"name": "Issue",
+			"name": "Issue-Service",
 			"item": [
 				{
 					"name": "Get all Issues",
@@ -480,7 +478,7 @@
 			]
 		},
 		{
-			"name": "User",
+			"name": "User-Service",
 			"item": [
 				{
 					"name": "Login as a User",
@@ -657,54 +655,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "News",
-			"item": [
-				{
-					"name": "Get News for User",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8069/api/news/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8069",
-							"path": [
-								"api",
-								"news",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All News: ADMIN only",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8069/api/news/admin/all",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8069",
-							"path": [
-								"api",
-								"news",
-								"admin",
-								"all"
-							]
-						}
-					},
-					"response": []
-				}
-			]
 		}
 	],
 	"auth": {
@@ -712,7 +662,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzZXJ2aWNlLWF1dGgiLCJpZCI6ImE0NDNmZmQwLWY3YTgtNDRmNi04YWQzLTg3YWNkMWU5MTA0MiIsInVzZXJuYW1lIjoiUGV0ZXJfWndlZ2F0IiwicGFzc3dvcmQiOiJ7YmNyeXB0fSQyYSQxMCR0LjNLdWJ0eVhzT0VPOS5lb1dSelRPWk1NVHVpUHZMcmhTZTlZRnpnelYySjhrVnRJT2lMYSIsIm5hbWUiOiJQZXRlciIsImxhc3ROYW1lIjoiWndlZ2F0IiwiZW1haWwiOiJwZXRlci56d2VnYXRAbW5pLnRobS5kZSIsImRhdGVPZkJpcnRoIjoxNjI3ODYyNDAwMDAwLCJjcmVhdGVUaW1lIjoxNjI3OTQ0ODY4Mzc4LCJnbG9iYWxSb2xlIjoiQURNSU4iLCJsYXN0TG9naW4iOjE2Mjc5NDQ4NjgzNzgsImlhdCI6MTYyNzk0NDg5OCwiZXhwIjoxNjI3OTUwODk4fQ.ZGlpAq2omUPY8qk5P33-bPL7WlKJqwhxV-cMOksft1m0tZSy3FoZZUi_hXoAsxMbE1WV1kv41F19SRSiCj8q5w",
+				"value": "",
 				"type": "string"
 			}
 		]
