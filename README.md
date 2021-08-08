@@ -3,7 +3,7 @@
 The results of the microservice project of group 6 can be found in different repositories.
 The repositories contain microservices which are used to build a ticket system. With this system you are
 able to create projects and this projects can contain issues. Issues and projects can be managed.\
-In the current orga repository is the overall docker organisation and the documentation.
+In the current orga repository is the overall docker orchestration and the documentation.
 
 All the other necessary repositories can be found [here](https://git.thm.de/microservicesss21).
 
@@ -90,8 +90,13 @@ Global: percentage of failed events is less than 5.0 : true
 [info] Simulation(s) execution ended.
 [success] Total time: 47 s, completed 08.08.2021, 21:37:38
 ```
-> Note: Even when saying failed this might be caused due high response times. 
+> Note: Even when saying failed this might be caused due high response times.
 > Please check our the report in any case.
 
+## Saga Pattern
 
-## Saga
+The Saga pattern is implemented in choreography-style. This means that the service starting a distributed transaction as saga is in control of the complete process.
+
+Whenever a service is requested to execute a task involving local transactions in multiple services an event is sent out via a seperate saga ActiveMQ topic. The event includes a reference to the saga-subject e.g., the id of the project to be deleted. All services involved in this saga receive the event and start their local transaction withholding the deleted or unaltered data as compensating transaction in case a rollback is necessary. The result, failure or success, is then communicated with another event via ActiveMQ. When all involved services report success, the starting service confirms the saga completion and all services may delete their compensating transaction data. In case of a single failure, all services are ordered to execute their compensating transaction.
+
+The saga pattern is implemented exemplary for the project-service deleting a project with its associated issues stored within the issue-services database.
