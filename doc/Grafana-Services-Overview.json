@@ -58,7 +58,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1628424250637,
+  "iteration": 1628424354461,
   "links": [],
   "panels": [
     {
@@ -1164,7 +1164,7 @@
       "type": "stat"
     }
   ],
-  "refresh": false,
+  "refresh": "5s",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [],
@@ -1206,6 +1206,6 @@
   },
   "timezone": "",
   "title": "Microservices-Overview",
-  "uid": "microservices_overview",
+  "uid": "ZbsyxYM7z",
   "version": 2
 }
