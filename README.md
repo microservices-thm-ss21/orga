@@ -78,5 +78,20 @@ You may execute different scenarios by exchanging the scenario in the `setUp` me
 For different amounts of users please modify the injected number of users.
 You may chain multiple scenarios or execute them simultaneous.
 
+You can view the results of the stresstest on a detailed website (recommended).
+Please just copy the report-filepath into your browser:
+```
+Please open the following file: /PATH/TO/MICROSERVICES/microservicesss21/stresstest-gatling/target/gatling/runscenarios-xxxx/index.html
+Global: mean of response time is less than 1000.0 : true
+Global: max of response time is less than 2000.0 : true
+Global: percentage of successful events is greater than 95.0 : true
+Global: percentage of failed events is less than 5.0 : true
+[info] Simulation RunScenarios successful.
+[info] Simulation(s) execution ended.
+[success] Total time: 47 s, completed 08.08.2021, 21:37:38
+```
+> Note: Even when saying failed this might be caused due high response times. 
+> Please check our the report in any case.
+
 
 ## Saga
