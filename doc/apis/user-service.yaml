@@ -226,9 +226,6 @@ components:
           format: date-time
         globalRole:
           type: string
-        lastLogin:
-          type: string
-          format: date-time
 
     ArrayOfUsers:
       type: array
