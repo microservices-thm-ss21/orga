@@ -39,7 +39,7 @@ This includes an [architecture](https://git.thm.de/microservicesss21/orga/-/blob
 and a [MessageMQ Communication](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/diagrams/Event_Diagram.pdf) overview about the microservices internal communication.
 
 You can test the services by using their api. The apis are documented [here](https://git.thm.de/microservicesss21/orga/-/tree/master/doc/apis).
-Also a [Postman collection](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/Micro-Services.project_service.postman_collection.json) is included.
+Also a [Postman collection](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/apis/Micro-Services.postman_collection.json) is included.
 You may login and then copy the auth token into the top level microservices-level and set a global auth.
 
 ## Event System / Messages
