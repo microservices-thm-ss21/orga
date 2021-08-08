@@ -52,8 +52,6 @@ services:
       - network
   influx:
     image: influxdb:1.8.6
-    ports:
-      - 8086:8086
     volumes:
       - ./../influxDB:/var/lib/influxdb
       - ./influx/influx.conf:/etc/influxdb/influx.conf
@@ -63,7 +61,7 @@ services:
   grafana:
     image: grafana/grafana
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - ./grafana/lib:/var/lib/grafana
     networks:
