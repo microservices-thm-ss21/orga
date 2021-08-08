@@ -39,6 +39,8 @@ This includes an [architecture](https://git.thm.de/microservicesss21/orga/-/blob
 and a [MessageMQ Communication](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/diagrams/Event_Diagram.pdf) overview about the microservices internal communication.
 
 You can test the services by using their api. The apis are documented [here](https://git.thm.de/microservicesss21/orga/-/tree/master/doc/apis).
+Also a [Postman collection](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/Micro-Services.project_service.postman_collection.json) is included.
+You may login and then copy the auth token into the top level microservices-level and set a global auth.
 
 ## Monitoring
 
@@ -99,7 +101,7 @@ The Saga pattern is implemented in choreography-style.
 This means that the service starting a distributed transaction as saga is in control of the complete process.
 
 Whenever a service is requested to execute a task involving local transactions in multiple 
-services an event is sent out via a seperate saga ActiveMQ topic. 
+services an event is sent out via a separate saga ActiveMQ topic. 
 The event includes a reference to the saga-subject e.g., the id of the project to be deleted. 
 All services involved in this saga receive the event and start their local transaction 
 withholding the deleted or unaltered data as compensating transaction in case a rollback is necessary. 
