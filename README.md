@@ -3,7 +3,7 @@
 The results of the microservice project of group 6 can be found in different repositories.
 The repositories contain microservices which are used to build a ticket system. With this system you are
 able to create projects and this projects can contain issues. Issues and projects can be managed.\
-In the current orga repository is the overall docker organisation and the documentation.
+In the current orga repository is the overall docker orchestration and the documentation.
 
 All the other necessary repositories can be found [here](https://git.thm.de/microservicesss21).
 
