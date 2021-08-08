@@ -59,12 +59,6 @@ tasks.register("buildNewsService", GradleBuild::class) {
     tasks = listOf("clean", "build")
 }
 
-tasks.register("publishServiceLib", GradleBuild::class) {
-    description = "Shortcut to publish service-lib"
-    buildFile = File("../service-lib/lib/build.gradle.kts")
-    tasks = listOf("clean", "publish")
-}
-
 tasks.register("publishServiceLibMaven", Exec::class) {
     if (OperatingSystem.current().isWindows) {
         workingDir = File("../service-lib")
