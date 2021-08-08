@@ -42,6 +42,20 @@ You can test the services by using their api. The apis are documented [here](htt
 Also a [Postman collection](https://git.thm.de/microservicesss21/orga/-/blob/master/doc/Micro-Services.project_service.postman_collection.json) is included.
 You may login and then copy the auth token into the top level microservices-level and set a global auth.
 
+## Event System / Messages
+All services use ActiveMQ as message broker for exchanging events within the system. There are a number of topics predefined which are used to exchange specialized events.
+
+We differentiate between three types of events:
+
+1. DataEvent <br>
+An event standing for a change in data - e.g. the creation, deletion or update of a project.
+
+2. DomainEvent <br>
+An event representing a change relevant within the application domain - e.g. the assignment of an issue to a user. Domain events are sent within a topic per emitting service and currently only observed by the news service.
+
+3. SagaEvent <br>
+An event used within a transaction following the saga pattern.
+
 ## Monitoring
 
 The monitoring is realized by collecting statistics into an InfluxDB-Database in combination with a graphical display via Grafana.
