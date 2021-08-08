@@ -79,7 +79,6 @@ Please upload the Grafana-Dashboard json file [Grafana-Services-Overview.json](h
 Choose a random datasource on the selection.
 4. [View the Dashboard](http://localhost:3000/d/microservices_overview/microservices-overview?orgId=1) and scroll down to view every service.
 
-
 ## Stresstest
 
 A Stresstest is included within the repository [stresstest-gatling](https://git.thm.de/microservicesss21/gatling-service).
@@ -108,6 +107,16 @@ Global: percentage of failed events is less than 5.0 : true
 ```
 > Note: Even when saying failed this might be caused due high response times.
 > Please check our the report in any case.
+
+### Configuration on Windows 10 and IntelliJ IDE
+
+1. Open the project of repository [stresstest-gatling](https://git.thm.de/microservicesss21/gatling-service) in IntelliJ.
+2. Install the Scala Plugin via `File → Settings → Plugins`. You may need to restart IntelliJ (skip if the plugin is already installed).
+3. Add the stresstest service as a module via `File → Project Structure → Modules → + → Import Module → [gatling-service](https://git.thm.de/microservicesss21/gatling-service) → sbt → Dowload both library and sbt sources, use sbt shell for builds, set Project JDK (tested with JDK 12.0.2) → Finish`.
+4. Add a new Run/Debug Configuration as an sbt Task that runs `Gatling/test`.
+5. Make sure the sbt shell is available in the IDE (Tool Windows bar, located at the bottom). If it is not, you may need to restart IntelliJ.
+6. Run the system via `docker compose up` within the `orga` directory.
+7. Run the stresstest (sbt Task configured in step 4).
 
 ## Saga Pattern
 
