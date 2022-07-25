@@ -6,14 +6,14 @@ plugins {
 }
 
 val repos = mapOf(
-    Pair("orga", Pair("../orga", "git@git.thm.de:microservicesss21/orga.git")),
-    Pair("service-lib", Pair("../service-lib", "git@git.thm.de:microservicesss21/service-lib.git")),
-    Pair("issue-service", Pair("../issue-service", "git@git.thm.de:microservicesss21/issue-service.git")),
-    Pair("project-service", Pair("../project-service", "git@git.thm.de:microservicesss21/project-service.git")),
-    Pair("user-service", Pair("../user-service", "git@git.thm.de:microservicesss21/user-service.git")),
-    Pair("news-service", Pair("../news-service", "git@git.thm.de:microservicesss21/news-service.git")),
-    Pair("gateway", Pair("../gateway", "git@git.thm.de:microservicesss21/gateway.git")),
-    Pair("gatling-service", Pair("../gatling-service", "git@git.thm.de:microservicesss21/gatling-service.git"))
+    Pair("orga", Pair("../orga", "git@github.com:microservices-thm-ss21/orga.git")),
+    Pair("service-lib", Pair("../service-lib", "git@github.com:microservices-thm-ss21/service-lib.git")),
+    Pair("issue-service", Pair("../issue-service", "git@github.com:microservices-thm-ss21/issue-service.git")),
+    Pair("project-service", Pair("../project-service", "git@github.com:microservices-thm-ss21/project-service.git")),
+    Pair("user-service", Pair("../user-service", "git@github.com:microservices-thm-ss21/user-service.git")),
+    Pair("news-service", Pair("../news-service", "git@github.com:microservices-thm-ss21/news-service.git")),
+    Pair("gateway", Pair("../gateway", "git@github.com:microservices-thm-ss21/gateway.git")),
+    Pair("gatling-service", Pair("../gatling-service", "git@github.com:microservices-thm-ss21/gatling-service.git"))
 )
 
 repositories {
